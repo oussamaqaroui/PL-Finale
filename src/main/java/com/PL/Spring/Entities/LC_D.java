@@ -18,11 +18,11 @@ import javax.persistence.Table;
 public class LC_D extends Filiere{
 	
 	
-	/*
-	@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL) // eager parce qu'il ne trouve pas les role et cascade problème d'enregistrement des fils avant le père
+	
+	@OneToMany 
 	@JoinColumn(name="F_ID")
 	private Collection<Niveau> Niveaux;
-	*/
+	
 
 
 	

@@ -2,10 +2,12 @@ package com.PL.Spring.Entities;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -44,6 +46,9 @@ public class Student extends User implements Serializable {
 	
 	private Date dateModification;
 
+	@ManyToMany(mappedBy="students")
+	private Collection<Niveau> Niveaux;
+	
 	public String getNom() {
 		return nom;
 	}

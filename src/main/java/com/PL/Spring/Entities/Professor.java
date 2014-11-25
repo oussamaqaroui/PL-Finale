@@ -2,6 +2,7 @@ package com.PL.Spring.Entities;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -9,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -50,6 +52,10 @@ public class Professor extends User implements Serializable {
 	
 	@OneToOne(mappedBy="HeadOfDep")
 	private Departement HDep;//Departement pour lequel il est chef
+	
+	@OneToMany
+	@JoinColumn(name="user_id")
+	private Collection<Module> Modules;
 
 	public String getNom() {
 		return nom;
