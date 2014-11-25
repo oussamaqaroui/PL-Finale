@@ -84,9 +84,9 @@ public class testUser {
 		u.setPassword("toto");
 		metier.editUser(u);
 		*/
-		Admin a=metier.findAdmin(new Long(4));
+		/*Admin a=metier.findAdmin(new Long(4));
 		a.setActived(true);
-		metier.editAdmin(a);
+		metier.editAdmin(a);*/
 		
 		
 	}
@@ -110,7 +110,7 @@ public class testUser {
 
 	@Test
 	public void testGetAllUsers() {
-		System.out.println("*** \n"+metier.getAllAdmins()+" \n***");
+		//System.out.println("*** \n"+metier.getAllAdmins()+" \n***");
 	}
 
 }
