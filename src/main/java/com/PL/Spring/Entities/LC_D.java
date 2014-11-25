@@ -17,24 +17,14 @@ import javax.persistence.Table;
 @Table(name="Licence_Deust")
 public class LC_D extends Filiere{
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="FilID")
-	private Long FilID;
+	
 	/*
 	@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL) // eager parce qu'il ne trouve pas les role et cascade problème d'enregistrement des fils avant le père
-	@JoinColumn(name="FilID")
+	@JoinColumn(name="F_ID")
 	private Collection<Niveau> Niveaux;
 	*/
 
-	public Long getFilID() {
-		return FilID;
-	}
 
-	public void setFilID(Long filID) {
-		FilID = filID;	
-	}
-	
 	
 
 }
