@@ -4,8 +4,12 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -43,6 +47,9 @@ public class Professor extends User implements Serializable {
 	private Date dateCreation;
 	
 	private Date dateModification;
+	
+	@OneToOne(mappedBy="HeadOfDep")
+	private Departement HDep;//Departement pour lequel il est chef
 
 	public String getNom() {
 		return nom;
