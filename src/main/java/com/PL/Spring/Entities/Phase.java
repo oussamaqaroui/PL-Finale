@@ -1,5 +1,6 @@
 package com.PL.Spring.Entities;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -35,6 +36,33 @@ public class Phase implements java.io.Serializable{
 	@Column(name="PhaseID")
 	private Long PhaseID;
 	
+	@NotEmpty
+	private String nomPhase;
+	
+	@NotEmpty
+	private String DescriptionPhase;
+
+	private Date dateDPhase;
+	
+	private Date dateDFhase;
+	
+	
+	public Date getDateDPhase() {
+		return dateDPhase;
+	}
+
+	public void setDateDPhase(Date dateDPhase) {
+		this.dateDPhase = dateDPhase;
+	}
+
+	public Date getDateDFhase() {
+		return dateDFhase;
+	}
+
+	public void setDateDFhase(Date dateDFhase) {
+		this.dateDFhase = dateDFhase;
+	}
+
 	private Set<Module> listModules = new HashSet<Module>(0);
 	
 	public Set<Module> getListModules() {
@@ -45,12 +73,7 @@ public class Phase implements java.io.Serializable{
 		this.listModules = listModules;
 	}
 
-	@NotEmpty
-	private String nomPhase;
 	
-	@NotEmpty
-	private String DescriptionPhase;
-
 	public Long getPhaseID() {
 		return PhaseID;
 	}
@@ -77,9 +100,10 @@ public class Phase implements java.io.Serializable{
 
 	@Override
 	public String toString() {
-		return "Phase [PhaseID=" + PhaseID + ", listModules=" + listModules
-				+ ", nomPhase=" + nomPhase + ", DescriptionPhase="
-				+ DescriptionPhase + "]";
+		return "Phase [PhaseID=" + PhaseID + ", nomPhase=" + nomPhase
+				+ ", DescriptionPhase=" + DescriptionPhase + ", dateDPhase="
+				+ dateDPhase + ", dateDFhase=" + dateDFhase + ", listModules="
+				+ listModules + "]";
 	}
 
 	

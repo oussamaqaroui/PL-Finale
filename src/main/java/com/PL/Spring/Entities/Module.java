@@ -32,6 +32,23 @@ public class Module implements java.io.Serializable{
 	
 	
 	
+	public Module() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
+	public Module(Long moduleID, Set<Phase> listPhases, String nomModule,
+			String descriptionModule, int nombreHeures) {
+		super();
+		ModuleID = moduleID;
+		this.listPhases = listPhases;
+		this.nomModule = nomModule;
+		DescriptionModule = descriptionModule;
+		NombreHeures = nombreHeures;
+	}
+
+
 	public Set<Phase> getListPhases() {
 		return listPhases;
 	}
