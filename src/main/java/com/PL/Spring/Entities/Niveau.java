@@ -22,17 +22,12 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Table(name="Niveau")
 public class Niveau implements java.io.Serializable{
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="NiveauID")
 	private Long NiveauID;
 	
-	//@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL) // eager parce qu'il ne trouve pas les role et cascade problème d'enregistrement des fils avant le père
+	@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL) // eager parce qu'il ne trouve pas les role et cascade problème d'enregistrement des fils avant le père
 	@JoinColumn(name="NiveauID")
 	private Collection<Student> roles;
 	
