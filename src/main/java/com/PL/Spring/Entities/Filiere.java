@@ -52,7 +52,22 @@ public abstract class Filiere {
 	public void setDateCreation(Date dateCreation) {
 		DateCreation = dateCreation;
 	}
+	@Override
+	public String toString() {
+		return "Filiere [F_ID=" + F_ID + ", Title=" + Title + ", Description="
+				+ Description + ", NombreAnnee=" + NombreAnnee
+				+ ", DateCreation=" + DateCreation + "]";
+	}
+	public Filiere(Long f_ID, String title, String description,
+			int nombreAnnee, Date dateCreation) {
+		super();
+		F_ID = f_ID;
+		Title = title;
+		Description = description;
+		NombreAnnee = nombreAnnee;
+		DateCreation = dateCreation;
+	}
 	
-	
+	public Filiere(){}
 
 }

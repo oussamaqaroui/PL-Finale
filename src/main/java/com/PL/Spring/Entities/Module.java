@@ -96,6 +96,25 @@ public class Module implements java.io.Serializable{
 	}
 
 
+	@Override
+	public String toString() {
+		return "Module [ModuleID=" + ModuleID + ", Phases=" + Phases
+				+ ", nomModule=" + nomModule + ", DescriptionModule="
+				+ DescriptionModule + ", NombreHeures=" + NombreHeures + "]";
+	}
+
+
+	public Module(Long moduleID, Collection<Phase> phases, String nomModule,
+			String descriptionModule, int nombreHeures) {
+		super();
+		ModuleID = moduleID;
+		Phases = phases;
+		this.nomModule = nomModule;
+		DescriptionModule = descriptionModule;
+		NombreHeures = nombreHeures;
+	}
+
+	
 	
 	
 	
