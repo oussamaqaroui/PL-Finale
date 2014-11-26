@@ -104,6 +104,32 @@ public class Niveau implements java.io.Serializable{
 	public void setAnnescolaire(String annescolaire) {
 		this.annescolaire = annescolaire;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Niveau [NiveauID=" + NiveauID + ", students=" + students
+				+ ", Phases=" + Phases + ", nomNiveau=" + nomNiveau
+				+ ", DescriptionNiveau=" + DescriptionNiveau + ", dateDebut="
+				+ dateDebut + ", dateFin=" + dateFin + ", annescolaire="
+				+ annescolaire + "]";
+	}
+
+
+	public Niveau(Long niveauID, Collection<Student> students,
+			Collection<Phase> phases, String nomNiveau,
+			String descriptionNiveau, Date dateDebut, Date dateFin,
+			String annescolaire) {
+		super();
+		NiveauID = niveauID;
+		this.students = students;
+		Phases = phases;
+		this.nomNiveau = nomNiveau;
+		DescriptionNiveau = descriptionNiveau;
+		this.dateDebut = dateDebut;
+		this.dateFin = dateFin;
+		this.annescolaire = annescolaire;
+	}
 	
 	
 

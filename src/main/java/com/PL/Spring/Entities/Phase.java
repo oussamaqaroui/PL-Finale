@@ -92,7 +92,26 @@ public class Phase implements java.io.Serializable{
 		DescriptionPhase = descriptionPhase;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "Phase [PhaseID=" + PhaseID + ", nomPhase=" + nomPhase
+				+ ", DescriptionPhase=" + DescriptionPhase + ", dateDPhase="
+				+ dateDPhase + ", dateDFhase=" + dateDFhase + ", Modules="
+				+ Modules + "]";
+	}
+
+	public Phase(Long phaseID, String nomPhase, String descriptionPhase,
+			Date dateDPhase, Date dateDFhase, Collection<Module> modules) {
+		super();
+		PhaseID = phaseID;
+		this.nomPhase = nomPhase;
+		DescriptionPhase = descriptionPhase;
+		this.dateDPhase = dateDPhase;
+		this.dateDFhase = dateDFhase;
+		Modules = modules;
+	}
+
+	public Phase(){}
 	
 
 }

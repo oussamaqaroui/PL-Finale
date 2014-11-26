@@ -10,6 +10,12 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import com.PL.Spring.Entities.Admin;
+import com.PL.Spring.Entities.Departement;
+import com.PL.Spring.Entities.FI_M_D;
+import com.PL.Spring.Entities.LC_D;
+import com.PL.Spring.Entities.Module;
+import com.PL.Spring.Entities.Niveau;
+import com.PL.Spring.Entities.Phase;
 import com.PL.Spring.Entities.Professor;
 import com.PL.Spring.Entities.Student;
 import com.PL.Spring.Entities.User;
@@ -17,7 +23,10 @@ import com.PL.Spring.Entities.User;
 
 
 
-public class UserDaoImp implements UserDaoInt,AdminDaoInt,StudentDaoInt,ProfessorDaoInt{
+public class UserDaoImp implements UserDaoInt,AdminDaoInt,StudentDaoInt,ProfessorDaoInt,DepartementDaoInt
+,PhaseDaoInt,NiveauDaoInt,FI_M_D_DaoInt,LC_D_DaoInt,ModuleDaoInt
+
+{
 
 	@PersistenceContext
 	private EntityManager em;
@@ -210,5 +219,233 @@ String req=new String("select o from Admin o where ");
 		return query.getResultList();
 	}
 
+	@Override
+	public void addDepartement(Departement departement) {
+		em.persist(departement);	
+		
+	}
+
+	@Override
+	public void editDepartement(Departement departement) {
+		this.em.merge(departement);
+		
+	}
+
+	@Override
+	public void deleteDepartement(Long Dep_Id) {
+		Departement d=em.getReference(Departement.class, Dep_Id);
+		em.remove(d);
+		
+	}
+
+	@Override
+	public Departement findDepartement(Long Dep_Id) {
+		return em.find(Departement.class, Dep_Id);
+	}
+
+	@Override
+	public Departement findDepByTitle(String DepTitle) {
+		Query query=this.em.createQuery("SELECT o from Departement o where o.Title =:nomdep");
+		query.setParameter("nomdep", DepTitle);
+		return (Departement)query.getSingleResult();
+	}
+
+	@Override
+	public List<Departement> getAllDepartements() {
+		Query query=this.em.createQuery("SELECT o from Departement o");
+		return query.getResultList();
+	}
+
+	@Override
+	public void addPhase(Phase phase) {
+		em.persist(phase);
+		
+	}
+
+	@Override
+	public void editPhase(Phase phase) {
+		em.merge(phase);
+		
+	}
+
+	@Override
+	public void deletePhase(Long phaseID) {
+		Phase p=em.getReference(Phase.class,phaseID);
+		em.remove(p);
+		
+	}
+
+	@Override
+	public Phase findPhase(Long phaseID) {
+		return em.find(Phase.class, phaseID);
+	}
+
+	@Override
+	public Phase findPhaseByName(String nomPhase) {
+		Query query=this.em.createQuery("SELECT o from Phase o where o.Title =:nomp");
+		query.setParameter("nomp", nomPhase);
+		return (Phase)query.getSingleResult();
+	}
+
+	@Override
+	public List<Phase> getAllPhase() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
+	@Override
+	public void addNiveau(Niveau niveau) {
+		// TODO Auto-generated method stub
+		em.persist(niveau);
+		
+	}
+
+	@Override
+	public void editNiveau(Niveau niveau) {
+		// TODO Auto-generated method stub
+		this.em.merge(niveau);
+		
+	}
+
+	@Override
+	public void deleteLNiveau(Long niveauID) {
+		// TODO Auto-generated method stub
+		Niveau d=em.getReference(Niveau.class, niveauID);
+		em.remove(d);
+	}
+
+	@Override
+	public Niveau findNiveau(Long niveauID) {
+		
+		return em.find(Niveau.class, niveauID);
+	}
+
+	@Override
+	public Niveau findNiveauByName(String nomNiveau) {
+		// TODO Auto-generated method stub
+		Query query=this.em.createQuery("SELECT o from Niveau o where o.nomNiveau =:nomN");
+		query.setParameter("nomN", nomNiveau);
+		return (Niveau)query.getSingleResult();
+	}
+
+	@Override
+	public List<Niveau> getAllNiveaux() {
+		// TODO Auto-generated method stub
+		Query query=this.em.createQuery("SELECT o from Niveau o");
+		return query.getResultList();
+	}
+	
+	@Override
+	public void addFI_M_D(FI_M_D F) {
+		em.persist(F);
+		
+	}
+
+	@Override
+	public void editFI_M_D(FI_M_D F) {
+		this.em.merge(F);
+		
+	}
+
+	@Override
+	public void deleteFI_M_D(Long F_ID) {
+		FI_M_D d=em.getReference(FI_M_D.class, F_ID);
+		em.remove(d);
+		
+	}
+
+	@Override
+	public FI_M_D findFI_M_D(Long F_ID) {
+		return em.find(FI_M_D.class, F_ID);
+	}
+
+	@Override
+	public FI_M_D findFI_M_D_ByTitle(String FiName) {
+		Query query=this.em.createQuery("SELECT o from FI_M_D o where o.Title =:nomf");
+		query.setParameter("nomf", FiName);
+		return (FI_M_D)query.getSingleResult();
+	}
+
+	@Override
+	public List<FI_M_D> getAllFI_D_M() {
+		Query query=this.em.createQuery("SELECT o from FI_M_D o");
+		return query.getResultList();
+	}
+
+	@Override
+	public void addLC_D(LC_D L) {
+		em.persist(L);
+		
+	}
+
+	@Override
+	public void editLC_D(LC_D F) {
+		em.merge(F);
+		
+	}
+
+	@Override
+	public void deleteLC_D(Long F_ID) {
+		LC_D d=em.getReference(LC_D.class, F_ID);
+		em.remove(d);
+		
+	}
+
+	@Override
+	public LC_D findLC_D(Long F_ID) {
+		return em.find(LC_D.class, F_ID);
+	}
+
+	@Override
+	public LC_D findLC_DByTitle(String FiName) {
+		Query query=this.em.createQuery("SELECT o from LC_D o where o.Title =:nomf");
+		query.setParameter("nomf", FiName);
+		return (LC_D)query.getSingleResult();
+	}
+
+	@Override
+	public List<LC_D> getAllLC_D() {
+		Query query=this.em.createQuery("SELECT o from LC_D o");
+		return query.getResultList();
+	}
+	
+	@Override
+	public void addModule(Module module) {
+			em.persist(module);
+	
+		
+	}
+
+	@Override
+	public void editModule(Module module) {
+		em.merge(module);
+		
+	}
+
+	@Override
+	public void deleteLModule(Long moduleID) {
+		Module d=em.getReference(Module.class, moduleID);
+		em.remove(d);
+		
+	}
+
+	@Override
+	public Module findModule(Long moduleID) {
+		return em.find(Module.class, moduleID);
+	}
+
+	@Override
+	public Module findModuleByTitle(String nomModule) {
+		
+		Query query=this.em.createQuery("SELECT o from Module o where o.Title =:nomm");
+		query.setParameter("nomm", nomModule);
+		return (Module)query.getSingleResult();
+	}
+
+	@Override
+	public List<Module> getAllModules() {
+		Query query=this.em.createQuery("SELECT o from Module o");
+		return query.getResultList();
+	}
+
 }

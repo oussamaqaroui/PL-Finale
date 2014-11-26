@@ -1,6 +1,7 @@
 package com.PL.Spring.Entities;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -36,8 +37,9 @@ public class LC_D extends Filiere{
 		return "LC_D [Niveaux=" + Niveaux + "]";
 	}
 
-	public LC_D(Collection<Niveau> niveaux) {
-		super();
+	public LC_D(Collection<Niveau> niveaux,Long f_ID, String title, String description,
+			int nombreAnnee, Date dateCreation) {
+		super(f_ID,title,description,nombreAnnee,dateCreation );
 		Niveaux = niveaux;
 	}
 	

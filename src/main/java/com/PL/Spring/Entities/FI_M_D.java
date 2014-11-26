@@ -1,6 +1,7 @@
 package com.PL.Spring.Entities;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,12 +30,18 @@ public class FI_M_D extends Filiere{
 		Niveaux = niveaux;
 	}
 
-	public FI_M_D(Collection<Niveau> niveaux) {
-		super(); // mettre les attribut de filiere
+	public FI_M_D(Collection<Niveau> niveaux,Long f_ID, String title, String description,
+					int nombreAnnee, Date dateCreation) {
+				super(f_ID,title,description,nombreAnnee,dateCreation );
 		Niveaux = niveaux;
 	}
 	
 	public FI_M_D(){}
+
+	@Override
+	public String toString() {
+		return "FI_M_D [Niveaux=" + Niveaux + "]";
+	}
 	
 	
 }
