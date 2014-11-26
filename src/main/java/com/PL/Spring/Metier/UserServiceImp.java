@@ -7,11 +7,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 
+
 import com.PL.Spring.DAO.UserDaoImp;
 import com.PL.Spring.Entities.Admin;
 import com.PL.Spring.Entities.Departement;
 import com.PL.Spring.Entities.FI_M_D;
 import com.PL.Spring.Entities.LC_D;
+import com.PL.Spring.Entities.Module;
 import com.PL.Spring.Entities.Professor;
 import com.PL.Spring.Entities.Student;
 import com.PL.Spring.Entities.User;
@@ -282,6 +284,42 @@ public class UserServiceImp implements UserServiceInt{
 	public List<LC_D> getAllLC_D() {
 		
 		return userDaoImp.getAllLC_D();
+	}
+
+	@Override
+	public void addModule(Module module) {
+		userDaoImp.addModule(module);
+		
+	}
+
+	@Override
+	public void editModule(Module module) {
+		userDaoImp.editModule(module);
+		
+	}
+
+	@Override
+	public void deleteLModule(Long moduleID) {
+		userDaoImp.deleteLModule(moduleID);
+		
+	}
+
+	@Override
+	public Module findModule(Long moduleID) {
+		
+		return userDaoImp.findModule(moduleID);
+	}
+
+	@Override
+	public Module findModuleByTitle(String nomModule) {
+	
+		return userDaoImp.findModuleByTitle(nomModule);
+	}
+
+	@Override
+	public List<Module> getAllModules() {
+		
+		return userDaoImp.getAllModules();
 	}
 
 }

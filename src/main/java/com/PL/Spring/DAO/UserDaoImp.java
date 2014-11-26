@@ -13,6 +13,7 @@ import com.PL.Spring.Entities.Admin;
 import com.PL.Spring.Entities.Departement;
 import com.PL.Spring.Entities.FI_M_D;
 import com.PL.Spring.Entities.LC_D;
+import com.PL.Spring.Entities.Module;
 import com.PL.Spring.Entities.Professor;
 import com.PL.Spring.Entities.Student;
 import com.PL.Spring.Entities.User;
@@ -20,7 +21,7 @@ import com.PL.Spring.Entities.User;
 
 
 
-public class UserDaoImp implements UserDaoInt,AdminDaoInt,StudentDaoInt,ProfessorDaoInt,DepartementDaoInt,FI_M_D_DaoInt,LC_D_DaoInt{
+public class UserDaoImp implements UserDaoInt,AdminDaoInt,StudentDaoInt,ProfessorDaoInt,DepartementDaoInt,FI_M_D_DaoInt,LC_D_DaoInt,ModuleDaoInt{
 
 	@PersistenceContext
 	private EntityManager em;
@@ -321,6 +322,45 @@ String req=new String("select o from Admin o where ");
 	@Override
 	public List<LC_D> getAllLC_D() {
 		Query query=this.em.createQuery("SELECT o from LC_D o");
+		return query.getResultList();
+	}
+
+	@Override
+	public void addModule(Module module) {
+			em.persist(module);
+	
+		
+	}
+
+	@Override
+	public void editModule(Module module) {
+		em.merge(module);
+		
+	}
+
+	@Override
+	public void deleteLModule(Long moduleID) {
+		Module d=em.getReference(Module.class, moduleID);
+		em.remove(d);
+		
+	}
+
+	@Override
+	public Module findModule(Long moduleID) {
+		return em.find(Module.class, moduleID);
+	}
+
+	@Override
+	public Module findModuleByTitle(String nomModule) {
+		
+		Query query=this.em.createQuery("SELECT o from Module o where o.Title =:nomm");
+		query.setParameter("nomm", nomModule);
+		return (Module)query.getSingleResult();
+	}
+
+	@Override
+	public List<Module> getAllModules() {
+		Query query=this.em.createQuery("SELECT o from Module o");
 		return query.getResultList();
 	}
 

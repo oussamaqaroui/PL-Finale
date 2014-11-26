@@ -7,6 +7,7 @@ import com.PL.Spring.Entities.Admin;
 import com.PL.Spring.Entities.Departement;
 import com.PL.Spring.Entities.FI_M_D;
 import com.PL.Spring.Entities.LC_D;
+import com.PL.Spring.Entities.Module;
 import com.PL.Spring.Entities.Professor;
 import com.PL.Spring.Entities.Student;
 import com.PL.Spring.Entities.User;
@@ -66,6 +67,13 @@ public interface UserServiceInt {
 	LC_D  findLC_D(Long F_ID);
 	LC_D findLC_DByTitle(String FiName);
 	List<LC_D> getAllLC_D();
+	
+	void addModule(Module module);
+	void editModule(Module module);
+	void deleteLModule(Long moduleID);
+	Module findModule(Long moduleID);
+	Module findModuleByTitle(String nomModule);
+	List<Module> getAllModules();
 	
 
 }
