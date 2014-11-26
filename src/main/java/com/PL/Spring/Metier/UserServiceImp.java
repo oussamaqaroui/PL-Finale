@@ -5,8 +5,10 @@ import java.util.Map;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import com.PL.Spring.DAO.DepartementDaoImp;
 import com.PL.Spring.DAO.UserDaoImp;
 import com.PL.Spring.Entities.Admin;
+import com.PL.Spring.Entities.Departement;
 import com.PL.Spring.Entities.Professor;
 import com.PL.Spring.Entities.Student;
 import com.PL.Spring.Entities.User;
@@ -15,6 +17,7 @@ import com.PL.Spring.Entities.User;
 public class UserServiceImp implements UserServiceInt{
 	
 	private UserDaoImp userDaoImp;
+	private DepartementDaoImp depDaoImp;
 
 	public UserDaoImp getUserDaoImp() {
 		return userDaoImp;
@@ -167,6 +170,43 @@ public class UserServiceImp implements UserServiceInt{
 	@Override
 	public List<Admin> finAdminByProps(Map<String, Object> props) {
 		return userDaoImp.finAdminByProps(props);
+	}
+
+	@Override
+	public void addDepartement(Departement departement) {
+		depDaoImp.addDepartement(departement);
+		
+	}
+
+	@Override
+	public void editDepartement(Departement departement) {
+
+		depDaoImp.editDepartement(departement);
+		
+	}
+
+	@Override
+	public void deleteDepartement(Long Dep_Id) {
+		depDaoImp.deleteDepartement(Dep_Id);
+		
+	}
+
+	@Override
+	public Departement findDepartement(Long Dep_Id) {
+		
+		return depDaoImp.findDepartement(Dep_Id);
+	}
+
+	@Override
+	public Departement findDepByTitle(String DepTitle) {
+		
+		return depDaoImp.findDepByTitle(DepTitle);
+	}
+
+	@Override
+	public List<Departement> getAllDepartements() {
+		
+		return depDaoImp.getAllDepartements();
 	}
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.PL.Spring.Entities.Admin;
+import com.PL.Spring.Entities.Departement;
 import com.PL.Spring.Entities.Professor;
 import com.PL.Spring.Entities.Student;
 import com.PL.Spring.Entities.User;
@@ -38,6 +39,14 @@ public interface UserServiceInt {
 	Student findStudent(Long userId);
 	Student findStudentByName(String username);
 	List<Student> getAllStudents();
+	
+	
+	void addDepartement(Departement departement);
+	void editDepartement(Departement departement);
+	void deleteDepartement(Long Dep_Id);
+	Departement  findDepartement(Long Dep_Id);
+	Departement findDepByTitle(String DepTitle);
+	List<Departement> getAllDepartements();
 	
 
 }
