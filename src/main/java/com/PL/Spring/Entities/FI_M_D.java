@@ -20,8 +20,21 @@ public class FI_M_D extends Filiere{
 	@OneToMany 
 	@JoinColumn(name="F_ID")
 	private Collection<Niveau> Niveaux;
-	
 
+	public Collection<Niveau> getNiveaux() {
+		return Niveaux;
+	}
+
+	public void setNiveaux(Collection<Niveau> niveaux) {
+		Niveaux = niveaux;
+	}
+
+	public FI_M_D(Collection<Niveau> niveaux) {
+		super(); // mettre les attribut de filiere
+		Niveaux = niveaux;
+	}
+	
+	public FI_M_D(){}
 	
 	
 }

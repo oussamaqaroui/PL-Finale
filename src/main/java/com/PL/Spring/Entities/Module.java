@@ -41,10 +41,6 @@ public class Module implements java.io.Serializable{
 
 
 	
-
-
-	
-
 	@NotEmpty
 	private String nomModule;
 	

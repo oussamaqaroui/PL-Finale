@@ -38,4 +38,73 @@ public class Departement {
 	@JoinColumn(name="Dep_ID")
 	private Collection<FI_M_D> FMDS;
 
+	public Long getDep_ID() {
+		return Dep_ID;
+	}
+
+	public void setDep_ID(Long dep_ID) {
+		Dep_ID = dep_ID;
+	}
+
+	public String getTitle() {
+		return Title;
+	}
+
+	public void setTitle(String title) {
+		Title = title;
+	}
+
+	public String getDescription() {
+		return Description;
+	}
+
+	public void setDescription(String description) {
+		Description = description;
+	}
+
+	public Professor getHeadOfDep() {
+		return HeadOfDep;
+	}
+
+	public void setHeadOfDep(Professor headOfDep) {
+		HeadOfDep = headOfDep;
+	}
+
+	public Collection<Professor> getInstroctors() {
+		return Instroctors;
+	}
+
+	public void setInstroctors(Collection<Professor> instroctors) {
+		Instroctors = instroctors;
+	}
+
+	public Collection<FI_M_D> getFMDS() {
+		return FMDS;
+	}
+
+	public void setFMDS(Collection<FI_M_D> fMDS) {
+		FMDS = fMDS;
+	}
+
+	@Override
+	public String toString() {
+		return "Departement [Dep_ID=" + Dep_ID + ", Title=" + Title
+				+ ", Description=" + Description + ", HeadOfDep=" + HeadOfDep
+				+ ", Instroctors=" + Instroctors + ", FMDS=" + FMDS + "]";
+	}
+
+	public Departement(Long dep_ID, String title, String description,
+			Professor headOfDep, Collection<Professor> instroctors,
+			Collection<FI_M_D> fMDS) {
+		super();
+		Dep_ID = dep_ID;
+		Title = title;
+		Description = description;
+		HeadOfDep = headOfDep;
+		Instroctors = instroctors;
+		FMDS = fMDS;
+	}
+	
+	public Departement(){}
+
 }

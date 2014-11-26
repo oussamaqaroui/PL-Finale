@@ -22,8 +22,26 @@ public class LC_D extends Filiere{
 	@OneToMany 
 	@JoinColumn(name="F_ID")
 	private Collection<Niveau> Niveaux;
-	
 
+	public Collection<Niveau> getNiveaux() {
+		return Niveaux;
+	}
+
+	public void setNiveaux(Collection<Niveau> niveaux) {
+		Niveaux = niveaux;
+	}
+
+	@Override
+	public String toString() {
+		return "LC_D [Niveaux=" + Niveaux + "]";
+	}
+
+	public LC_D(Collection<Niveau> niveaux) {
+		super();
+		Niveaux = niveaux;
+	}
+	
+	public LC_D(){}
 
 	
 
