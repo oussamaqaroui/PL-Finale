@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.PL.Spring.Entities.Admin;
+import com.PL.Spring.Entities.Departement;
+import com.PL.Spring.Entities.Professor;
 import com.PL.Spring.Entities.Role;
 import com.PL.Spring.Entities.User;
 
@@ -31,10 +33,10 @@ public class testUser {
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 	}
-
+/*
 	@Test
 	public void testAddUser() {
-		/*
+		
 		User u=new User();
 		
 		Role r=new Role();
@@ -73,17 +75,17 @@ public class testUser {
 		a.setNom("NAJIH");
 		a.setPrenom("Yahya");
 		a.setEmail("YahyaNajih@gmail.com");
-		metier.addAdmin(a);*/
+		metier.addAdmin(a);
 		
 		}
 
 	@Test
 	public void testEditUser() {
-		/*
+		
 		User u=metier.findUserByName("toto");
 		u.setPassword("toto");
 		metier.editUser(u);
-		*/
+		
 		Admin a=metier.findAdmin(new Long(4));
 		a.setActived(true);
 		metier.editAdmin(a);
@@ -111,6 +113,52 @@ public class testUser {
 	@Test
 	public void testGetAllUsers() {
 		System.out.println("*** \n"+metier.getAllAdmins()+" \n***");
-	}
+	}*/
 
+	@Test
+	public void testFAddDepartement() {
+		
+		Departement d =new Departement();
+		d.setTitle("Informatique");
+		d.setDescription("descriptioon departement info");
+		Professor p=new Professor();
+		
+		
+		
+		p.setUser_name("Aymane");
+		p.setPassword("0000");
+		
+		Role r=new Role();
+		r.setRoleName("ROLE_Professor");
+		Role r2=new Role();
+		r2.setRoleName("ROLE_ADMIN");
+		
+		Collection<Role> c;
+		c=new Vector<Role>();
+		c.add(r);
+		c.add(r2);
+		
+		
+		p.setRoles(c);
+		
+		p.setAdresse("Rabat");
+		
+		p.setDateNaissance(new Date());
+		p.setNom("EBELKACEMI");
+		p.setPrenom("Aymane");
+		p.setEmail("ay@gmail.com");
+		//metier.addAdmin(a);
+		d.setHeadOfDep(p);
+		metier.addProfessor(p);
+		
+		
+		Collection<Professor> cp;
+		cp=new Vector<Professor>();
+		cp.add(p);
+		metier.addDepartement(d);
+		
+		
+		
+	}
+	
 }

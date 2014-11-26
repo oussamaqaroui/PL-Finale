@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import com.PL.Spring.Entities.Admin;
+import com.PL.Spring.Entities.Departement;
 import com.PL.Spring.Entities.Professor;
 import com.PL.Spring.Entities.Student;
 import com.PL.Spring.Entities.User;
@@ -17,7 +18,7 @@ import com.PL.Spring.Entities.User;
 
 
 
-public class UserDaoImp implements UserDaoInt,AdminDaoInt,StudentDaoInt,ProfessorDaoInt{
+public class UserDaoImp implements UserDaoInt,AdminDaoInt,StudentDaoInt,ProfessorDaoInt,DepartementDaoInt{
 
 	@PersistenceContext
 	private EntityManager em;
@@ -207,6 +208,43 @@ String req=new String("select o from Admin o where ");
 	@Override
 	public List<Professor> getAllProfessors() {
 		Query query=this.em.createQuery("SELECT o from Professor o");
+		return query.getResultList();
+	}
+
+	@Override
+	public void addDepartement(Departement departement) {
+		em.persist(departement);	
+		
+	}
+
+	@Override
+	public void editDepartement(Departement departement) {
+		this.em.merge(departement);
+		
+	}
+
+	@Override
+	public void deleteDepartement(Long Dep_Id) {
+		Departement d=em.getReference(Departement.class, Dep_Id);
+		em.remove(d);
+		
+	}
+
+	@Override
+	public Departement findDepartement(Long Dep_Id) {
+		return em.find(Departement.class, Dep_Id);
+	}
+
+	@Override
+	public Departement findDepByTitle(String DepTitle) {
+		Query query=this.em.createQuery("SELECT o from Departement o where o.Title =:nomdep");
+		query.setParameter("nomdep", DepTitle);
+		return (Departement)query.getSingleResult();
+	}
+
+	@Override
+	public List<Departement> getAllDepartements() {
+		Query query=this.em.createQuery("SELECT o from Departement o");
 		return query.getResultList();
 	}
 
