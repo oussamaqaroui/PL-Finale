@@ -6,9 +6,12 @@ import java.util.Map;
 import org.springframework.transaction.annotation.Transactional;
 
 
+
 import com.PL.Spring.DAO.UserDaoImp;
 import com.PL.Spring.Entities.Admin;
 import com.PL.Spring.Entities.Departement;
+import com.PL.Spring.Entities.FI_M_D;
+import com.PL.Spring.Entities.LC_D;
 import com.PL.Spring.Entities.Professor;
 import com.PL.Spring.Entities.Student;
 import com.PL.Spring.Entities.User;
@@ -207,6 +210,78 @@ public class UserServiceImp implements UserServiceInt{
 	public List<Departement> getAllDepartements() {
 		
 		return userDaoImp.getAllDepartements();
+	}
+
+	@Override
+	public void addFI_M_D(FI_M_D F) {
+		userDaoImp.addFI_M_D(F);
+		
+	}
+
+	@Override
+	public void editFI_M_D(FI_M_D F) {
+		userDaoImp.editFI_M_D(F);
+		
+	}
+
+	@Override
+	public void deleteFI_M_D(Long F_ID) {
+		userDaoImp.deleteFI_M_D(F_ID);
+		
+	}
+
+	@Override
+	public FI_M_D findFI_M_D(Long F_ID) {
+		
+		return userDaoImp.findFI_M_D(F_ID);
+	}
+
+	@Override
+	public FI_M_D findFI_M_D_ByTitle(String FiName) {
+		
+		return userDaoImp.findFI_M_D_ByTitle(FiName);
+	}
+
+	@Override
+	public List<FI_M_D> getAllFI_D_M() {
+		
+		return userDaoImp.getAllFI_D_M();
+	}
+
+	@Override
+	public void addLC_D(LC_D L) {
+		userDaoImp.addLC_D(L);
+		
+	}
+
+	@Override
+	public void editLC_D(LC_D F) {
+		userDaoImp.editLC_D(F);
+		
+	}
+
+	@Override
+	public void deleteLC_D(Long F_ID) {
+		userDaoImp.deleteLC_D(F_ID);
+		
+	}
+
+	@Override
+	public LC_D findLC_D(Long F_ID) {
+		
+		return userDaoImp.findLC_D(F_ID);
+	}
+
+	@Override
+	public LC_D findLC_DByTitle(String FiName) {
+		
+		return userDaoImp.findLC_DByTitle(FiName);
+	}
+
+	@Override
+	public List<LC_D> getAllLC_D() {
+		
+		return userDaoImp.getAllLC_D();
 	}
 
 }

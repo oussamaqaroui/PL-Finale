@@ -11,6 +11,8 @@ import javax.persistence.Query;
 
 import com.PL.Spring.Entities.Admin;
 import com.PL.Spring.Entities.Departement;
+import com.PL.Spring.Entities.FI_M_D;
+import com.PL.Spring.Entities.LC_D;
 import com.PL.Spring.Entities.Professor;
 import com.PL.Spring.Entities.Student;
 import com.PL.Spring.Entities.User;
@@ -18,7 +20,7 @@ import com.PL.Spring.Entities.User;
 
 
 
-public class UserDaoImp implements UserDaoInt,AdminDaoInt,StudentDaoInt,ProfessorDaoInt,DepartementDaoInt{
+public class UserDaoImp implements UserDaoInt,AdminDaoInt,StudentDaoInt,ProfessorDaoInt,DepartementDaoInt,FI_M_D_DaoInt,LC_D_DaoInt{
 
 	@PersistenceContext
 	private EntityManager em;
@@ -245,6 +247,80 @@ String req=new String("select o from Admin o where ");
 	@Override
 	public List<Departement> getAllDepartements() {
 		Query query=this.em.createQuery("SELECT o from Departement o");
+		return query.getResultList();
+	}
+
+	@Override
+	public void addFI_M_D(FI_M_D F) {
+		em.persist(F);
+		
+	}
+
+	@Override
+	public void editFI_M_D(FI_M_D F) {
+		this.em.merge(F);
+		
+	}
+
+	@Override
+	public void deleteFI_M_D(Long F_ID) {
+		FI_M_D d=em.getReference(FI_M_D.class, F_ID);
+		em.remove(d);
+		
+	}
+
+	@Override
+	public FI_M_D findFI_M_D(Long F_ID) {
+		return em.find(FI_M_D.class, F_ID);
+	}
+
+	@Override
+	public FI_M_D findFI_M_D_ByTitle(String FiName) {
+		Query query=this.em.createQuery("SELECT o from FI_M_D o where o.Title =:nomf");
+		query.setParameter("nomf", FiName);
+		return (FI_M_D)query.getSingleResult();
+	}
+
+	@Override
+	public List<FI_M_D> getAllFI_D_M() {
+		Query query=this.em.createQuery("SELECT o from FI_M_D o");
+		return query.getResultList();
+	}
+
+	@Override
+	public void addLC_D(LC_D L) {
+		em.persist(L);
+		
+	}
+
+	@Override
+	public void editLC_D(LC_D F) {
+		em.merge(F);
+		
+	}
+
+	@Override
+	public void deleteLC_D(Long F_ID) {
+		LC_D d=em.getReference(LC_D.class, F_ID);
+		em.remove(d);
+		
+	}
+
+	@Override
+	public LC_D findLC_D(Long F_ID) {
+		return em.find(LC_D.class, F_ID);
+	}
+
+	@Override
+	public LC_D findLC_DByTitle(String FiName) {
+		Query query=this.em.createQuery("SELECT o from LC_D o where o.Title =:nomf");
+		query.setParameter("nomf", FiName);
+		return (LC_D)query.getSingleResult();
+	}
+
+	@Override
+	public List<LC_D> getAllLC_D() {
+		Query query=this.em.createQuery("SELECT o from LC_D o");
 		return query.getResultList();
 	}
 

@@ -5,6 +5,8 @@ import java.util.Map;
 
 import com.PL.Spring.Entities.Admin;
 import com.PL.Spring.Entities.Departement;
+import com.PL.Spring.Entities.FI_M_D;
+import com.PL.Spring.Entities.LC_D;
 import com.PL.Spring.Entities.Professor;
 import com.PL.Spring.Entities.Student;
 import com.PL.Spring.Entities.User;
@@ -47,6 +49,23 @@ public interface UserServiceInt {
 	Departement  findDepartement(Long Dep_Id);
 	Departement findDepByTitle(String DepTitle);
 	List<Departement> getAllDepartements();
+	
+	
+	void addFI_M_D(FI_M_D F);
+	void editFI_M_D(FI_M_D F);
+	void deleteFI_M_D(Long F_ID);
+	FI_M_D  findFI_M_D(Long F_ID);
+	FI_M_D findFI_M_D_ByTitle(String FiName);
+	List<FI_M_D> getAllFI_D_M();
+	
+	
+	
+	void addLC_D(LC_D L);
+	void editLC_D(LC_D F);
+	void deleteLC_D(Long F_ID);
+	LC_D  findLC_D(Long F_ID);
+	LC_D findLC_DByTitle(String FiName);
+	List<LC_D> getAllLC_D();
 	
 
 }
