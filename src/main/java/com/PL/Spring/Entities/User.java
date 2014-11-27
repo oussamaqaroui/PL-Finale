@@ -38,11 +38,13 @@ public class User implements Serializable{
 	@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL) // eager parce qu'il ne trouve pas les role et cascade problème d'enregistrement des fils avant le père
 	@JoinColumn(name="user_id")
 	private Collection<Role> roles;
-	public Long getIdUser() {
+	
+	
+	public Long getUser_id() {
 		return user_id;
 	}
-	public void setIdUser(Long idUser) {
-		this.user_id = idUser;
+	public void setUser_id(Long user_id) {
+		this.user_id = user_id;
 	}
 	public String getUser_name() {
 		return user_name;

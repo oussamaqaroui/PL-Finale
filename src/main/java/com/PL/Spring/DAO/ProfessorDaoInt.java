@@ -1,7 +1,9 @@
 package com.PL.Spring.DAO;
 
 import java.util.List;
+import java.util.Map;
 
+import com.PL.Spring.Entities.Admin;
 import com.PL.Spring.Entities.Professor;
 
 
@@ -14,4 +16,5 @@ public interface ProfessorDaoInt {
 	Professor  findProfessor(Long userId);
 	Professor findProfessorByName(String username);
 	List<Professor> getAllProfessors();
+	List<Professor> finProfessorByProps(Map<String, Object> props);
 }

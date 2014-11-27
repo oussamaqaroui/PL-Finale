@@ -447,5 +447,33 @@ String req=new String("select o from Admin o where ");
 		Query query=this.em.createQuery("SELECT o from Module o");
 		return query.getResultList();
 	}
+	
+	
+	@Override
+	public List<Professor> finProfessorByProps(Map<String, Object> props) {
+		String req=new String("select o from Professor o where ");
+		
+		//Construction de la requete
+		
+		Iterator it=props.keySet().iterator();
+		
+		while(it.hasNext())
+		{
+			String aide =(String)it.next();
+			req+="o."+aide+" = :"+aide;
+			if(it.hasNext())req+=" and ";
+		}
+		
+		//Creation de la requete 
+		Query query=this.em.createQuery(req);
+		
+		//Affectation des parametre
+		for(Entry<String,Object> e:props.entrySet())
+		{
+			query.setParameter(e.getKey(), e.getValue());
+		}
+		
+		return  query.getResultList();
+	}
 
 }

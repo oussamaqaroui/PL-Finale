@@ -99,7 +99,7 @@ public class AdminUsersController {
 			BufferedImage bi=ImageIO.read(file.getInputStream());
 			u.setPhoto(file.getBytes());
 			Long idP=null;
-			if(u.getIdUser() == null){
+			if(u.getUser_id() == null){
 				u.setDateCreation(new Date());	
 				metier.addAdmin(u);
 			}
@@ -111,7 +111,7 @@ public class AdminUsersController {
 			//file.transferTo(new File(path+"/"+"PROD_"+idP+"_"+file.getOriginalFilename()));
 		}
 		else{
-			if(u.getIdUser()==null)
+			if(u.getUser_id()==null)
 			{
 				u.setDateCreation(new Date());
 				metier.addAdmin(u);
@@ -148,7 +148,7 @@ public class AdminUsersController {
 		
 		props=new TreeMap<String,Object>();
 		
-		if(u.getIdUser()!=null) props.put("user_id", u.getIdUser());
+		if(u.getUser_id()!=null) props.put("user_id", u.getUser_id());
 		else
 		{
 			if(u.getUser_name()!=null && !u.getUser_name().equals(""))props.put("user_name",u.getUser_name());
