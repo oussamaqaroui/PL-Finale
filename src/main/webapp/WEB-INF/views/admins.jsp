@@ -88,7 +88,7 @@
 		  <th>ID</th><th>USERNAME</th><th>NOM</th><th>PRENOM</th><th>EMAIL</th>
 		  <th>ADRESSE</th><th>DATE NAISSANCE</th><th>PHOTO</th><th>ACTIVED</th>
 		</tr>
-	<c:forEach items="${users}" var="p">
+	<c:forEach items="${admins}" var="p">
 	    <tr>
 	       <td>${p.user_id}</td>
 	       <td>${p.user_name}</td>

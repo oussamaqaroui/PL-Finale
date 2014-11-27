@@ -60,7 +60,7 @@
 
 	<s:http auto-config="true" use-expressions="true"  >
         <s:intercept-url pattern="/login" access="permitAll" />
-        <s:intercept-url pattern="/adminUsers/*" access="hasRole('ROLE_ADMIN')"/>
+        <s:intercept-url pattern="/adminUsers/*" access="hasRole('ROLE_ADMIN_PR')"/>
         <s:session-management invalid-session-url="/login" />
         <s:form-login login-page="/login"
         		default-target-url="/"

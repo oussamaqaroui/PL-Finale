@@ -115,7 +115,8 @@ public class UserDaoImp implements UserDaoInt,AdminDaoInt,StudentDaoInt,Professo
 
 	@Override
 	public List<Admin> finAdminByProps(Map<String, Object> props) {
-String req=new String("select o from Admin o where ");
+		
+		String req=new String("select o from Admin o where ");
 		
 		//Construction de la requete
 		
