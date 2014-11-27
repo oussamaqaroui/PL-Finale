@@ -349,4 +349,10 @@ public class UserServiceImp implements UserServiceInt{
 		
 		return userDaoImp.getAllModules();
 	}
+	
+	@Override
+	public List<Professor> finProfessorByProps(Map<String, Object> props) {
+		
+		return userDaoImp.finProfessorByProps(props);
+	}
 }

@@ -36,6 +36,7 @@ public interface UserServiceInt {
 	Professor  findProfessor(Long userId);
 	Professor findProfessorByName(String username);
 	List<Professor> getAllProfessors();
+	public List<Professor> finProfessorByProps(Map<String, Object> props);
 	
 	void addStudent(Student student);
 	void editStudent(Student student);
