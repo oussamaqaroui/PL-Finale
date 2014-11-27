@@ -355,4 +355,11 @@ public class UserServiceImp implements UserServiceInt{
 		
 		return userDaoImp.finProfessorByProps(props);
 	}
+	
+	@Override
+	public List<Student> findStudentByProps(Map<String, Object> props) {
+		// TODO Auto-generated method stub
+		return userDaoImp.findStudentByProps(props);
+	}
+
 }

@@ -44,6 +44,7 @@ public interface UserServiceInt {
 	Student findStudent(Long userId);
 	Student findStudentByName(String username);
 	List<Student> getAllStudents();
+	List<Student> findStudentByProps(Map<String,Object> props);
 
 	void addPhase(Phase phase);
 	void editPhase(Phase phase);

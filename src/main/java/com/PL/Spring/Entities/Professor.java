@@ -50,10 +50,10 @@ public class Professor extends User implements Serializable {
 	
 	private Date dateModification;
 	
-	@OneToOne(mappedBy="HeadOfDep")
+	@OneToOne(mappedBy="HeadOfDep",cascade = CascadeType.ALL)
 	private Departement HDep;//Departement pour lequel il est chef
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name="user_id")
 	private Collection<Module> Modules;
 
