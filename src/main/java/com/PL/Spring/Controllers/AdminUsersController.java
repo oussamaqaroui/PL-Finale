@@ -7,11 +7,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.Vector;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
@@ -36,6 +38,7 @@ import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.PL.Spring.Entities.Admin;
+import com.PL.Spring.Entities.Role;
 import com.PL.Spring.Metier.UserServiceInt;
 
 
@@ -58,7 +61,7 @@ public class AdminUsersController {
 		model.addAttribute("admin", new Admin());
 		model.addAttribute("admins",admins);
 		
-		return "admins";
+		return "adminss";
 	}
 	
 	// Formulaire : on apuie sur le bouton getAll on récupère tous les admins
@@ -68,7 +71,7 @@ public class AdminUsersController {
 		props=null;
 		model.addAttribute("admin", new Admin());
 		model.addAttribute("admins",admins);
-		return "admins";
+		return "adminss";
 	}
 	
 	@RequestMapping(value="/suppAdmin")
@@ -79,7 +82,7 @@ public class AdminUsersController {
 		else admins=metier.finAdminByProps(props);
 		model.addAttribute("admin", new Admin());	
 		model.addAttribute("admins",admins);
-		return "admins";
+		return "adminss";
 	}
 	@RequestMapping(value="/editAdmin")
 	public String edit(long userID,Model model){
@@ -87,13 +90,23 @@ public class AdminUsersController {
 		
 		model.addAttribute("admin", u);	
 		model.addAttribute("admins",admins);
-		return "admins";
+		return "adminss";
 	}
 	
 	@RequestMapping(value="/saveAdmin",params="save")
 	public String saveUser(Admin u,BindingResult bindingResult,Model model,MultipartFile file) throws IOException{
 		
-		
+		if(u.getRoles()==null)
+		{
+			Role r=new Role();
+			r.setRoleName("ROLE_ADMIN");
+			
+			Collection<Role> c;
+			c=new Vector<Role>();
+			c.add(r);
+			
+			u.setRoles(c);
+		}
 		if(!file.isEmpty()){
 			//String path=System.getProperty("java.io.tmpdir");
 			BufferedImage bi=ImageIO.read(file.getInputStream());
@@ -130,7 +143,7 @@ public class AdminUsersController {
 		
 		model.addAttribute("admin", new Admin());	
 		model.addAttribute("admins",admins);
-		return "admins";
+		return "adminss";
 	}
     
 	@RequestMapping(value="photoAdmin",produces=MediaType.IMAGE_JPEG_VALUE)
@@ -168,6 +181,6 @@ public class AdminUsersController {
 		admins=metier.finAdminByProps(props);
 		model.addAttribute("admin", new Admin());	
 		model.addAttribute("admins",admins);
-		return "admins";
+		return "adminss";
 	}
 }
