@@ -519,7 +519,8 @@
                         <li><a href="">General</a></li>
                     </ul>
                     <!-- END Forms General Header -->
-
+					
+					<div class="block">
                     <div class="row">
                         <div class="col-md-6">
                             <!-- Basic Form Elements Block -->
@@ -655,13 +656,118 @@
 
                     <!-- Input Groups Row -->
                     
-                    <!-- Input Grid Row -->
+                    <!-- Table Styles Block -->
+                    <div class="block">
+                        <!-- Table Styles Title -->
+                        <div class="block-title">
+                            <h2><strong>Table</strong> Styles</h2>
+                        </div>
+                        <!-- END Table Styles Title -->
+
+                        <!-- Table Styles Content -->
+                        <!-- Changing classes functionality initialized in js/pages/tablesGeneral.js -->
+                        <div class="table-options clearfix">
+                            <div class="btn-group btn-group-sm pull-right">
+                                <a href="javascript:void(0)" class="btn btn-primary active" id="style-striped" data-toggle="tooltip" title=".table-striped">Striped</a>
+                                <a href="javascript:void(0)" class="btn btn-primary" id="style-condensed" data-toggle="tooltip" title=".table-condensed">Condensed</a>
+                                <a href="javascript:void(0)" class="btn btn-primary" id="style-hover" data-toggle="tooltip" title=".table-hover">Hover</a>
+                            </div>
+                            <div class="btn-group btn-group-sm pull-left" data-toggle="buttons">
+                                <label id="style-default" class="btn btn-primary active" data-toggle="tooltip" title=".table">
+                                    <input type="radio" name="style-options"> Default
+                                </label>
+                                <label id="style-bordered" class="btn btn-primary" data-toggle="tooltip" title=".table-bordered">
+                                    <input type="radio" name="style-options"> Bordered
+                                </label>
+                                <label id="style-borderless" class="btn btn-primary" data-toggle="tooltip" title=".table-borderless">
+                                    <input type="radio" name="style-options"> Borderless
+                                </label>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <!--
+                            Available Table Classes:
+                                'table'             - basic table
+                                'table-bordered'    - table with full borders
+                                'table-borderless'  - table with no borders
+                                'table-striped'     - striped table
+                                'table-condensed'   - table with smaller top and bottom cell padding
+                                'table-hover'       - rows highlighted on mouse hover
+                                'table-vcenter'     - middle align content vertically
+                            -->
+                            <table id="general-table" class="table table-striped table-vcenter">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">ID</th>
+                                        <th class="text-center">USERNAME</th>
+                                        <th class="text-center">NOM</th>
+                                        <th class="text-center">PRENOM</th>
+                                        <th class="text-center">EMAIL</th>
+		 							 	<th class="text-center">ADRESSE</th>
+		 							 	<th class="text-center">DATE NAISSANCE</th>
+		 							 	<th style="width: 150px;" class="text-center"><i class="gi gi-user"></i></th>
+		 							 	<th class="text-center">ACTIVED</th>
+                                        <th style="width: 150px;" class="text-center">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                	<c:forEach items="${admins}" var="p">
+	   	 								<tr>
+	      			 						<td>${p.user_id}</td>
+	       									<td>${p.user_name}</td>
+	       									<td>${p.nom}</td>
+	       									<td>${p.prenom}</td>
+	       									<td>${p.email}</td>
+	       									<td>${p.adresse}</td>
+	       									<td>${p.dateNaissance}</td>
+	       									<td><img width="100" height="100" alt=""src="photoAdmin?userID=${p.user_id}"></td>
+	       									<td>${p.actived}</td>
+	       									<td class="text-center">
+                                            	<div class="btn-group btn-group-xs">
+                                                	<a href="editAdmin?userID=${p.user_id}" data-toggle="tooltip" title="Edit" class="btn btn-default"><i class="fa fa-pencil"></i></a>
+                                                	<a href="suppAdmin?userID=${p.user_id}" data-toggle="tooltip" title="Delete" class="btn btn-danger"><i class="fa fa-times"></i></a>
+                                            	</div>
+                                        	</td>
+	       									
+	         
+	    								</tr>
+									</c:forEach>
+                                
+                                   
+                                    
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="10">
+                                            <div class="btn-group btn-group-sm pull-right">
+                                                <a href="javascript:void(0)" class="btn btn-primary" data-toggle="tooltip" title="Settings"><i class="fa fa-cog"></i></a>
+                                                <div class="btn-group btn-group-sm dropup">
+                                                    <a href="javascript:void(0)" class="btn btn-primary pull-right dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+                                                    <ul class="dropdown-menu dropdown-custom dropdown-menu-right">
+                                                        <li><a href="javascript:void(0)"><i class="fa fa-print pull-right"></i> Print</a></li>
+                                                        <li class="dropdown-header"><i class="fa fa-share pull-right"></i> Export As</li>
+                                                        <li>
+                                                            <a href="javascript:void(0)">.pdf</a>
+                                                            <a href="javascript:void(0)">.cvs</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                         
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <!-- END Table Styles Content -->
+                    </div>
+                    <!-- END Table Styles Block -->
                     
                    
                     <!-- END Form Example with Blocks in the Grid -->
                 </div>
                 <!-- END Page Content -->
-
+				</div>
                 <!-- Footer -->
                 <footer class="clearfix">
                     <div class="pull-right">
@@ -758,5 +864,9 @@
         <!-- Load and execute javascript code used only in this page -->
         <script src="<%=request.getContextPath()%>/resources/js/pages/formsGeneral.js"></script>
         <script>$(function(){ FormsGeneral.init(); });</script>
+        
+        <!-- Load and execute javascript code used only in this page -->
+        <script src="<%=request.getContextPath()%>/resources/js/pages/tablesGeneral.js"></script>
+        <script>$(function(){ TablesGeneral.init(); });</script>
     </body>
 </html> 

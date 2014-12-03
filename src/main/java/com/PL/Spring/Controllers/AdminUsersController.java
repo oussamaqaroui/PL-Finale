@@ -32,6 +32,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.HandlerExceptionResolver;
@@ -94,16 +95,26 @@ public class AdminUsersController {
 	}
 	
 	@RequestMapping(value="/saveAdmin",params="save")
-	public String saveUser(Admin u,BindingResult bindingResult,Model model,MultipartFile file) throws IOException{
+	public String saveUser(Admin u,BindingResult bindingResult,Model model,MultipartFile file,@RequestParam(value = "checkbox") String[] roles) throws IOException{
 		
 		if(u.getRoles()==null)
 		{
-			Role r=new Role();
-			r.setRoleName("ROLE_ADMIN");
-			
+			//if(roles==null) // Ajouter role par defaut admin
 			Collection<Role> c;
 			c=new Vector<Role>();
-			c.add(r);
+			Role r;
+			if(roles==null)
+			{
+				r=new Role();
+				r.setRoleName("ROLE_ADMIN");
+				c.add(r);
+			}
+			for(int i=0;i<roles.length;i++)
+			{
+				r=new Role();
+				r.setRoleName(roles[i]);
+				c.add(r);
+			}
 			
 			u.setRoles(c);
 		}
