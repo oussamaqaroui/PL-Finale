@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.PL.Spring.DAO.UserDaoImp;
 import com.PL.Spring.Entities.Admin;
+import com.PL.Spring.Entities.Document;
 import com.PL.Spring.Entities.FI_M_D;
 import com.PL.Spring.Entities.LC_D;
 import com.PL.Spring.Entities.Module;
@@ -358,8 +359,49 @@ public class UserServiceImp implements UserServiceInt{
 	
 	@Override
 	public List<Student> findStudentByProps(Map<String, Object> props) {
-		// TODO Auto-generated method stub
+		
 		return userDaoImp.findStudentByProps(props);
+	}
+
+	@Override
+	public void addDocument(Document doc) {
+		userDaoImp.addDocument(doc);
+	}
+
+	@Override
+	public void editDocument(Document doc) {
+		userDaoImp.editDocument(doc);
+		
+	}
+
+	@Override
+	public void deleteLDocument(Long docID) {
+		userDaoImp.deleteLDocument(docID);
+		
+	}
+
+	@Override
+	public Document findDocument(Long docID) {
+		
+		return userDaoImp.findDocument(docID);
+	}
+
+	@Override
+	public Document findDocumentByTitle(String nomdoc) {
+		
+		return userDaoImp.findDocumentByTitle(nomdoc);
+	}
+
+	@Override
+	public List<Document> getAllDocuments() {
+		
+		return userDaoImp.getAllDocuments();
+	}
+
+	@Override
+	public List<Module> getAllModulesByProfessor(Long uid) {
+		
+		return userDaoImp.getAllModulesByProfessor(uid);
 	}
 
 }

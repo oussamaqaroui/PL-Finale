@@ -12,5 +12,6 @@ public interface ModuleDaoInt {
 	Module findModule(Long moduleID);
 	Module findModuleByTitle(String nomModule);
 	List<Module> getAllModules();
+	List<Module> getAllModulesByProfessor(Long uid);
 	
 }

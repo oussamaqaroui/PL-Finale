@@ -21,14 +21,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Table(name="Professors")
 @PrimaryKeyJoinColumn(name="user_id")
 public class Professor extends User implements Serializable {
-	@Override
-	public String toString() {
-		return "Professor [nom=" + nom + ", prenom=" + prenom + ", email="
-				+ email + ", photo=" + Arrays.toString(photo)
-				+ ", dateNaissance=" + dateNaissance + ", adresse=" + adresse
-				+ ", dateCreation=" + dateCreation + ", dateModification="
-				+ dateModification + "]";
-	}
 
 	private static final long serialVersionUID = -3939879473294951527L;
 	
@@ -50,12 +42,14 @@ public class Professor extends User implements Serializable {
 	
 	private Date dateModification;
 	
-	@OneToOne(mappedBy="HeadOfDep",cascade = CascadeType.ALL)
-	private Departement HDep;//Departement pour lequel il est chef
-	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany//(fetch = FetchType.EAGER)//,cascade = CascadeType
 	@JoinColumn(name="user_id")
 	private Collection<Module> Modules;
+	
+	/*@OneToOne(mappedBy="HeadOfDep",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	private Departement HDep;//Departement pour lequel il est chef
+*/	
+	
 
 	public String getNom() {
 		return nom;
@@ -121,10 +115,42 @@ public class Professor extends User implements Serializable {
 		this.dateModification = dateModification;
 	}
 
-	public Professor(String username, String password, boolean actived,String nom, String prenom, String email, byte[] photo,
+	
+
+	public Professor() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+/*	public Departement getHDep() {
+		return HDep;
+	}
+
+	public void setHDep(Departement hDep) {
+		HDep = hDep;
+	}*/
+
+	public Collection<Module> getModules() {
+		return Modules;
+	}
+
+	public void setModules(Collection<Module> modules) {
+		Modules = modules;
+	}
+
+	@Override
+	public String toString() {
+		return "Professor [nom=" + nom + ", prenom=" + prenom + ", email="
+				+ email + ", photo=" + Arrays.toString(photo)
+				+ ", dateNaissance=" + dateNaissance + ", adresse=" + adresse
+				+ ", dateCreation=" + dateCreation + ", dateModification="
+				+ dateModification + ", Modules=" + Modules + "]";
+	}
+
+	public Professor(String nom, String prenom, String email, byte[] photo,
 			Date dateNaissance, String adresse, Date dateCreation,
-			Date dateModification) {
-		super(username, password, actived);
+			Date dateModification, Collection<Module> modules) {
+		super();
 		this.nom = nom;
 		this.prenom = prenom;
 		this.email = email;
@@ -133,11 +159,11 @@ public class Professor extends User implements Serializable {
 		this.adresse = adresse;
 		this.dateCreation = dateCreation;
 		this.dateModification = dateModification;
+		Modules = modules;
 	}
 
-	public Professor() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
 
+	
+	
+	
 }

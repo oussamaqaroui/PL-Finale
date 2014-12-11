@@ -5,12 +5,17 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -48,49 +53,90 @@ public class Phase implements java.io.Serializable{
 	
 	private Date dateDFhase;
 	
-	@ManyToMany
+
+	
+	/*@ManyToMany(fetch= FetchType.LAZY , cascade=CascadeType.ALL)
+	@JoinTable(name = "phases_modules",  joinColumns = { 
+			@JoinColumn(name = "PhaseID", nullable = false, updatable = false) }, 
+			inverseJoinColumns = { @JoinColumn(name = "ModuleID", 
+					nullable = false, updatable = false) })*/
+	@OneToMany//(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@JoinColumn(name="PhaseID")
 	private Collection<Module> Modules;
-	
-	public Date getDateDPhase() {
-		return dateDPhase;
-	}
 
-	public void setDateDPhase(Date dateDPhase) {
-		this.dateDPhase = dateDPhase;
-	}
 
-	public Date getDateDFhase() {
-		return dateDFhase;
-	}
 
-	public void setDateDFhase(Date dateDFhase) {
-		this.dateDFhase = dateDFhase;
-	}
-
-	
 	public Long getPhaseID() {
 		return PhaseID;
 	}
+
+
 
 	public void setPhaseID(Long phaseID) {
 		PhaseID = phaseID;
 	}
 
+
+
 	public String getNomPhase() {
 		return nomPhase;
 	}
+
+
 
 	public void setNomPhase(String nomPhase) {
 		this.nomPhase = nomPhase;
 	}
 
+
+
 	public String getDescriptionPhase() {
 		return DescriptionPhase;
 	}
 
+
+
 	public void setDescriptionPhase(String descriptionPhase) {
 		DescriptionPhase = descriptionPhase;
 	}
+
+
+
+	public Date getDateDPhase() {
+		return dateDPhase;
+	}
+
+
+
+	public void setDateDPhase(Date dateDPhase) {
+		this.dateDPhase = dateDPhase;
+	}
+
+
+
+	public Date getDateDFhase() {
+		return dateDFhase;
+	}
+
+
+
+	public void setDateDFhase(Date dateDFhase) {
+		this.dateDFhase = dateDFhase;
+	}
+
+
+
+	public Collection<Module> getModules() {
+		return Modules;
+	}
+
+
+
+	public void setModules(Collection<Module> modules) {
+		Modules = modules;
+	}
+
+
 
 	@Override
 	public String toString() {
@@ -99,6 +145,8 @@ public class Phase implements java.io.Serializable{
 				+ dateDPhase + ", dateDFhase=" + dateDFhase + ", Modules="
 				+ Modules + "]";
 	}
+
+
 
 	public Phase(Long phaseID, String nomPhase, String descriptionPhase,
 			Date dateDPhase, Date dateDFhase, Collection<Module> modules) {
@@ -111,7 +159,17 @@ public class Phase implements java.io.Serializable{
 		Modules = modules;
 	}
 
-	public Phase(){}
+
+
+	public Phase() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	
+	
+	
 	
 
 }

@@ -1,5 +1,7 @@
 package com.PL.Spring.DAO;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +13,7 @@ import javax.persistence.Query;
 
 import com.PL.Spring.Entities.Admin;
 import com.PL.Spring.Entities.Departement;
+import com.PL.Spring.Entities.Document;
 import com.PL.Spring.Entities.FI_M_D;
 import com.PL.Spring.Entities.LC_D;
 import com.PL.Spring.Entities.Module;
@@ -24,7 +27,7 @@ import com.PL.Spring.Entities.User;
 
 
 public class UserDaoImp implements UserDaoInt,AdminDaoInt,StudentDaoInt,ProfessorDaoInt,DepartementDaoInt
-,PhaseDaoInt,NiveauDaoInt,FI_M_D_DaoInt,LC_D_DaoInt,ModuleDaoInt
+,PhaseDaoInt,NiveauDaoInt,FI_M_D_DaoInt,LC_D_DaoInt,ModuleDaoInt,DocumentDaoInt
 
 {
 
@@ -120,11 +123,11 @@ public class UserDaoImp implements UserDaoInt,AdminDaoInt,StudentDaoInt,Professo
 		
 		//Construction de la requete
 		
-		Iterator it=props.keySet().iterator();
+		Iterator<String> it=props.keySet().iterator();
 		
 		while(it.hasNext())
 		{
-			String aide =(String)it.next();
+			String aide =it.next();
 			req+="o."+aide+" = :"+aide;
 			if(it.hasNext())req+=" and ";
 		}
@@ -209,7 +212,7 @@ public class UserDaoImp implements UserDaoInt,AdminDaoInt,StudentDaoInt,Professo
 
 	@Override
 	public Professor findProfessorByName(String username) {
-		Query query=this.em.createQuery("SELECT o from Professor o where o.user_name =:username");
+		Query query=this.em.createQuery("SELECT o from Professor o where o.nom =:username");
 		query.setParameter("username", username);
 		return (Professor)query.getSingleResult();
 	}
@@ -226,11 +229,11 @@ public class UserDaoImp implements UserDaoInt,AdminDaoInt,StudentDaoInt,Professo
 		
 		//Construction de la requete
 		
-		Iterator it=props.keySet().iterator();
+		Iterator<String> it=props.keySet().iterator();
 		
 		while(it.hasNext())
 		{
-			String aide =(String)it.next();
+			String aide =it.next();
 			req+="o."+aide+" = :"+aide;
 			if(it.hasNext())req+=" and ";
 		}
@@ -317,27 +320,27 @@ public class UserDaoImp implements UserDaoInt,AdminDaoInt,StudentDaoInt,Professo
 
 	@Override
 	public List<Phase> getAllPhase() {
-		// TODO Auto-generated method stub
-		return null;
+		Query query=this.em.createQuery("SELECT o from Phase o");
+		return query.getResultList();
 	}
 	
 	@Override
 	public void addNiveau(Niveau niveau) {
-		// TODO Auto-generated method stub
+		
 		em.persist(niveau);
 		
 	}
 
 	@Override
 	public void editNiveau(Niveau niveau) {
-		// TODO Auto-generated method stub
+		
 		this.em.merge(niveau);
 		
 	}
 
 	@Override
 	public void deleteLNiveau(Long niveauID) {
-		// TODO Auto-generated method stub
+		
 		Niveau d=em.getReference(Niveau.class, niveauID);
 		em.remove(d);
 	}
@@ -350,7 +353,7 @@ public class UserDaoImp implements UserDaoInt,AdminDaoInt,StudentDaoInt,Professo
 
 	@Override
 	public Niveau findNiveauByName(String nomNiveau) {
-		// TODO Auto-generated method stub
+		
 		Query query=this.em.createQuery("SELECT o from Niveau o where o.nomNiveau =:nomN");
 		query.setParameter("nomN", nomNiveau);
 		return (Niveau)query.getSingleResult();
@@ -358,7 +361,7 @@ public class UserDaoImp implements UserDaoInt,AdminDaoInt,StudentDaoInt,Professo
 
 	@Override
 	public List<Niveau> getAllNiveaux() {
-		// TODO Auto-generated method stub
+		
 		Query query=this.em.createQuery("SELECT o from Niveau o");
 		return query.getResultList();
 	}
@@ -465,7 +468,7 @@ public class UserDaoImp implements UserDaoInt,AdminDaoInt,StudentDaoInt,Professo
 	@Override
 	public Module findModuleByTitle(String nomModule) {
 		
-		Query query=this.em.createQuery("SELECT o from Module o where o.Title =:nomm");
+		Query query=this.em.createQuery("SELECT o from Module o where o.nomModule =:nomm");
 		query.setParameter("nomm", nomModule);
 		return (Module)query.getSingleResult();
 	}
@@ -475,6 +478,23 @@ public class UserDaoImp implements UserDaoInt,AdminDaoInt,StudentDaoInt,Professo
 		Query query=this.em.createQuery("SELECT o from Module o");
 		return query.getResultList();
 	}
+	
+	
+	@Override
+	public List<Module> getAllModulesByProfessor(Long u_id) {
+		//Query query=this.em.createQuery("SELECT o from Module o where o.user_id =: uid");
+		//query.setParameter("uid", u_id);
+		
+		
+		
+		Professor p= em.find(Professor.class, u_id);
+		
+		//List<Module> cmo=(List<Module>)p.getModules();
+		List list = new ArrayList(p.getModules());
+		
+		
+		return  list;
+	}
 
 	@Override
 	public List<Student> findStudentByProps(Map<String, Object> props) {
@@ -482,11 +502,11 @@ public class UserDaoImp implements UserDaoInt,AdminDaoInt,StudentDaoInt,Professo
 					
 					//Construction de la requete
 					
-					Iterator it=props.keySet().iterator();
+					Iterator<String> it=props.keySet().iterator();
 					
 					while(it.hasNext())
 					{
-						String aide =(String)it.next();
+						String aide =it.next();
 						req+="o."+aide+" = :"+aide;
 						if(it.hasNext())req+=" and ";
 					}
@@ -502,4 +522,43 @@ public class UserDaoImp implements UserDaoInt,AdminDaoInt,StudentDaoInt,Professo
 					
 					return  query.getResultList();
 		}
+
+	@Override
+	public void addDocument(Document doc) {
+		em.persist(doc);
+		
+	}
+
+	@Override
+	public void editDocument(Document doc) {
+		em.merge(doc);
+		
+	}
+
+	@Override
+	public void deleteLDocument(Long docID) {
+		Document d=em.getReference(Document.class, docID);
+		em.remove(d);
+		
+	}
+
+	@Override
+	public Document findDocument(Long docID) {
+		return em.find(Document.class, docID);
+	}
+
+	@Override
+	public Document findDocumentByTitle(String nomdoc) {
+		Query query=this.em.createQuery("SELECT o from Document o where o.nom =:nomm");
+		query.setParameter("nomm", nomdoc);
+		return (Document)query.getSingleResult();
+	}
+
+	@Override
+	public List<Document> getAllDocuments() {
+		Query query=this.em.createQuery("SELECT o from Document o");
+		return query.getResultList();
+	}
+
+
 }

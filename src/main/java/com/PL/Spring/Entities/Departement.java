@@ -26,9 +26,9 @@ public class Departement {
 	private String Title;
 	private String Description;
 	
-	@OneToOne
+	/*@OneToOne
 	@JoinColumn(name="HeadOfDep")
-	private Professor HeadOfDep;
+	private Professor HeadOfDep;*/
 	
 	@OneToMany
 	@JoinColumn(name="Dep_ID")
@@ -62,14 +62,14 @@ public class Departement {
 		Description = description;
 	}
 
-	public Professor getHeadOfDep() {
+/*	public Professor getHeadOfDep() {
 		return HeadOfDep;
 	}
 
 	public void setHeadOfDep(Professor headOfDep) {
 		HeadOfDep = headOfDep;
 	}
-
+*/
 	public Collection<Professor> getInstroctors() {
 		return Instroctors;
 	}
@@ -86,25 +86,25 @@ public class Departement {
 		FMDS = fMDS;
 	}
 
-	@Override
-	public String toString() {
-		return "Departement [Dep_ID=" + Dep_ID + ", Title=" + Title
-				+ ", Description=" + Description + ", HeadOfDep=" + HeadOfDep
-				+ ", Instroctors=" + Instroctors + ", FMDS=" + FMDS + "]";
-	}
 
+	
 	public Departement(Long dep_ID, String title, String description,
-			Professor headOfDep, Collection<Professor> instroctors,
-			Collection<FI_M_D> fMDS) {
+			Collection<Professor> instroctors, Collection<FI_M_D> fMDS) {
 		super();
 		Dep_ID = dep_ID;
 		Title = title;
 		Description = description;
-		HeadOfDep = headOfDep;
 		Instroctors = instroctors;
 		FMDS = fMDS;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Departement [Dep_ID=" + Dep_ID + ", Title=" + Title
+				+ ", Description=" + Description + ", Instroctors="
+				+ Instroctors + ", FMDS=" + FMDS + "]";
+	}
+
 	public Departement(){}
 
 }

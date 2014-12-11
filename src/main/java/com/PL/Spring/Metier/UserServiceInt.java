@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.PL.Spring.Entities.Admin;
+import com.PL.Spring.Entities.Document;
 import com.PL.Spring.Entities.FI_M_D;
 import com.PL.Spring.Entities.LC_D;
 import com.PL.Spring.Entities.Module;
@@ -82,5 +83,14 @@ public interface UserServiceInt {
 	Module findModule(Long moduleID);
 	Module findModuleByTitle(String nomModule);
 	List<Module> getAllModules();
+	List<Module> getAllModulesByProfessor(Long uid);
+	
+	void addDocument(Document doc);
+	void editDocument(Document doc);
+	void deleteLDocument(Long docID);
+	Document findDocument(Long docID);
+	Document findDocumentByTitle(String nomdoc);
+	List<Document> getAllDocuments();
+	
 
 }
