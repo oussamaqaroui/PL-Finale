@@ -47,7 +47,7 @@
         <!-- END Stylesheets -->
 
         <!-- Modernizr (browser feature detection library) & Respond.js (Enable responsive CSS code on browsers that don't support it, eg IE8) -->
-        <script src="<%=request.getContextPath()%>/js/vendor/modernizr-2.7.1-respond-1.4.2.min.js"></script>
+        <script src="<%=request.getContextPath()%>/resources/js/vendor/modernizr-2.7.1-respond-1.4.2.min.js"></script>
     </head>
     <!-- In the PHP version you can set the following options from inc/config file -->
     <!--
@@ -576,10 +576,10 @@
                                         <a href="#" class="sidebar-nav-submenu"><i class="fa fa-angle-left sidebar-nav-indicator"></i>e-Learning</a>
                                         <ul>
                                             <li>
-                                                <a href="page_ready_elearning_courses.html" class="active">Courses</a>
+                                                <a href="page_ready_elearning_courses.html">Courses</a>
                                             </li>
                                             <li>
-                                                <a href="page_ready_elearning_course_lessons.html">Course - Lessons</a>
+                                                <a href="page_ready_elearning_course_lessons.html" class="active">Course - Lessons</a>
                                             </li>
                                             <li>
                                                 <a href="page_ready_elearning_course_lesson.html">Course - Lesson Page</a>
@@ -857,170 +857,118 @@
                     <div class="content-header">
                         <div class="header-section">
                             <h1>
-                                <i class="gi gi-book_open"></i>Welcome to <strong>e-Learning</strong><br><small>Courses Hub!</small>
+                                <i class="fa fa-globe"></i>Intro to <strong>HTML5</strong><br><small>15 Lessons</small>
                             </h1>
                         </div>
                     </div>
                     <ul class="breadcrumb breadcrumb-top">
                         <li>Pages</li>
                         <li>e-Learning</li>
-                        <li><a href="">Courses</a></li>
+                        <li><a href="">Intro to HTML5</a></li>
                     </ul>
                     <!-- END Courses Header -->
 
                     <!-- Main Row -->
                     <div class="row">
                         <div class="col-md-8">
-                            <!-- Courses Content -->
-                            <div class="row">
-                               
-
-
-
-
-
-
-
-<c:forEach items="${modules}" var="m">
-
-
-
-                                <!-- Course Widget -->
-                                <div class="col-sm-6">
-                                    <div class="widget">
-                                        <div class="widget-advanced">
-                                            <!-- Widget Header -->
-                                            <div class="widget-header text-center themed-background-dark-flatie">
-                                                <div class="widget-options">
-                                                    <button class="btn btn-xs btn-default" data-toggle="tooltip" title="Love it!"><i class="fa fa-heart text-danger"></i></button>
-                                                </div>
-                                                <h3 class="widget-content-light">
-                                                    <a href="Documents?moduleID=${m.getModuleID()}" class="themed-color-flatie">${m.nomModule}</a><br>
-                                                    <small>${m.getDescriptionModule()}</small>
-                                                </h3>
-                                            </div>
-                                            <!-- END Widget Header -->
-
-                                            <!-- Widget Main -->
-                                            <div class="widget-main">
-                                                <a href="page_ready_elearning_course_lessons.html" class="widget-image-container animation-fadeIn">
-                                                    <span class="widget-icon themed-background-flatie"><i class="fa fa-code"></i></span>
-                                                </a>
-                                                <a href="page_ready_elearning_course_lessons.html" class="btn btn-sm btn-default pull-right">
-                                                  
-                                                    <i class="fa fa-clock-o"></i> ${m.getNombreHeures()} hours
-                                                </a>
-                                                <a href="page_ready_elearning_course_lessons.html" class="btn btn-sm btn-info">Free</a>
-                                            </div>
-                                            <!-- END Widget Main -->
+                            <!-- Course Widget -->
+                            <div class="widget">
+                                <div class="widget-advanced">
+                                    <!-- Widget Header -->
+                                    <div class="widget-header text-center themed-background-dark">
+                                        <div class="widget-options">
+                                            <button class="btn btn-xs btn-default" data-toggle="tooltip" title="Love it!"><i class="fa fa-heart text-danger"></i></button>
                                         </div>
+                                        <h3 class="widget-content-light">
+                                            <a href="page_ready_elearning_course_lessons.html">${module.nomModule}</a><br>
+                                            <small> ${module.getDescriptionModule()}</small>
+                                        </h3>
                                     </div>
+                                    <!-- END Widget Header -->
+
+                                    <!-- Widget Main -->
+                                    <div class="widget-main">
+                                        <a href="javascript:void(0)" class="widget-image-container animation-fadeIn">
+                                            <span class="widget-icon themed-background"><i class="fa fa-globe"></i></span>
+                                        </a>
+                                        <a href="javascript:void(0)" class="btn btn-sm btn-default pull-right">
+                                           
+                                            <i class="fa fa-clock-o"></i> ${module.getNombreHeures()} hours
+                                        </a>
+                                        <a href="javascript:void(0)" class="btn btn-sm btn-success">Free with Subscription</a>
+                                        <hr>
+                                        <!-- Lessons -->
+                                     
+                                     
+                                     
+                                     
+                                     
+                                     
+                                        <table class="table table-vcenter">
+                                            <thead>
+                                                <tr class="active">
+                                                    <th>TDs</th>
+                                                    <th class="text-right"><small><em></em></small></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                               <c:forEach items="${documents}" var="d">
+                                                <tr>
+                                                    <td><a href="page_ready_elearning_course_lesson.html">${d.getNom()}</a></td>
+                                                    <td class="text-right"><a href="downloadfilen?docID=${d.getIdDoc()}" class="btn btn-xs btn-primary"><i class="fa fa-play"></i> Start</a></td>
+                                                </tr>
+                                                </c:forEach>
+                                               
+                                            </tbody>
+                                        </table>
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                      
+                                        <!-- END Lessons -->
+                                    </div>
+                                    <!-- END Widget Main -->
                                 </div>
-                                <!-- END Course Widget -->
-
-
-</c:forEach>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                
-                                
-                                
-                                
-                                
-                                
                             </div>
-                            <!-- END Courses Content -->
+                            <!-- END Course Widget -->
                         </div>
                         <div class="col-md-4">
-                            <!-- Navigation Tabs -->
-                            <div class="block full">
-                                <!-- Navigation Tabs Title -->
-                                <div class="block-title">
-                                    <ul class="nav nav-tabs" data-toggle="tabs">
-                                        <li class="active"><a href="#courses-categories">Categories</a></li>
-                                        <li><a href="#courses-tools">Tools</a></li>
-                                    </ul>
+                            <!-- About Block -->
+                            <div class="block">
+                                <!-- About Content -->
+                              
+                              
+                                <div class="block-section">
+                                    <a href="javascript:void(0)" class="btn btn-lg btn-default btn-block"><i class="fa fa-download"></i> Download files</a>
                                 </div>
-                                <!-- END Navigation Tabs Title -->
-
-                                <!-- Navigation Tabs Content -->
-                                <div class="tab-content">
-                                    <div class="tab-pane active" id="courses-categories">
-                                        <ul class="nav nav-pills nav-stacked">
-                                            <li class="active">
-                                                <a href="javascript:void(0)"><span class="badge pull-right">271</span>All Topics</a>
-                                            </li>
-                                            <li>
-                                                <hr>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0)"><span class="badge pull-right">75</span><i class="gi gi-brush fa-fw themed-color-dark"></i> Design &amp; Illustration</a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0)"><span class="badge pull-right">60</span><i class="fa fa-code-fork fa-fw themed-color-dark"></i> Code</a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0)"><span class="badge pull-right">56</span><i class="gi gi-globe fa-fw themed-color-dark"></i> Web Design</a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0)"><span class="badge pull-right">30</span><i class="gi gi-camera fa-fw themed-color-dark"></i> Photography</a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0)"><span class="badge pull-right">38</span><i class="gi gi-camera_small fa-fw themed-color-dark"></i> 3D &amp; Motion Graphics</a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0)"><span class="badge pull-right">12</span><i class="gi gi-package fa-fw themed-color-dark"></i> Bundles</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="tab-pane" id="courses-tools">
-                                        <ul class="nav nav-pills nav-stacked">
-                                            <li class="active">
-                                                <a href="javascript:void(0)"><span class="badge pull-right">271</span>All Tools</a>
-                                            </li>
-                                            <li>
-                                                <hr>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0)"><span class="badge pull-right">25</span>Photoshop</a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0)"><span class="badge pull-right">10</span>Illustrator</a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0)"><span class="badge pull-right">5</span>InDesign</a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0)"><span class="badge pull-right">4</span>Cinema 4D</a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0)"><span class="badge pull-right">16</span>Lightroom</a>
-                                            </li>
-                                        </ul>
-                                        <div class="text-center">
-                                            <a href="javascript:void(0)" class="btn btn-xs btn-default">Show More..</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- END Navigation Tabs Content -->
+                                <!-- END About Content -->
                             </div>
-                            <!-- END Navigation Tabs -->
+                            <!-- END About Block -->
+
+                            <!-- Share Block -->
+                            <div class="block">
+                                <!-- Share Title -->
+                                <div class="block-title">
+                                    <h2><strong>Partager cours</strong> Cours</h2>
+                                </div>
+                                <!-- END Share Title -->
+
+                                <!-- Share Content -->
+                                <div class="block-section text-center">
+                                    <div class="btn-group">
+                                        <a href="javascript:void(0)" class="btn btn-default" data-toggle="tooltip" title="Facebook"><i class="si si-facebook"></i></a>
+                                        <a href="javascript:void(0)" class="btn btn-default" data-toggle="tooltip" title="Twitter"><i class="si si-twitter"></i></a>
+                                        <a href="javascript:void(0)" class="btn btn-default" data-toggle="tooltip" title="Google Plus"><i class="si si-google_plus"></i></a>
+                                        <a href="javascript:void(0)" class="btn btn-default" data-toggle="tooltip" title="Pinterest"><i class="si si-pinterest"></i></a>
+                                    </div>
+                                </div>
+                                <!-- END Share Content -->
+                            </div>
+                            <!-- END Share Block -->
 
                             <!-- Your Account Block -->
                             <div class="block">
@@ -1043,7 +991,7 @@
                                                 <td class="text-right" style="width: 30%;">
                                                     <img src="<%=request.getContextPath()%>/resources/img/placeholders/avatars/avatar2.jpg" alt="avatar" class="img-circle">
                                                 </td>
-                                                <td><a href="page_ready_user_profile.html"><strong>John Doe</strong></a><br><em>e-Learner</em></td>
+                                                <td><a href="page_ready_user_profile.html"><strong>CHANTIT</strong></a><br><em>e-Learner</em></td>
                                             </tr>
                                             <tr>
                                                 <td class="text-right">Account</td>

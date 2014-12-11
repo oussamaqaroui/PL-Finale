@@ -28,6 +28,9 @@ public class Document implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idDoc;
+	
+	
+	
 	public Long getIdDoc() {
 		return idDoc;
 	}
