@@ -7,9 +7,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.PL.Spring.DAO.UserDaoImp;
 import com.PL.Spring.Entities.Admin;
+import com.PL.Spring.Entities.Departement;
 import com.PL.Spring.Entities.Document;
-import com.PL.Spring.Entities.FI_M_D;
-import com.PL.Spring.Entities.LC_D;
+import com.PL.Spring.Entities.Filiere;
 import com.PL.Spring.Entities.Module;
 import com.PL.Spring.Entities.Niveau;
 import com.PL.Spring.Entities.Phase;
@@ -209,111 +209,41 @@ public class UserServiceImp implements UserServiceInt{
 
 	@Override
 	public void addNiveau(Niveau niveau) {
-		// TODO Auto-generated method stub
+		
 		userDaoImp.addNiveau(niveau);
 	}
 
 	@Override
 	public void editNiveau(Niveau niveau) {
-		// TODO Auto-generated method stub
+		
 		userDaoImp.editNiveau(niveau);
 	}
 
 	@Override
 	public void deleteLNiveau(Long niveauID) {
-		// TODO Auto-generated method stub
+		
 		userDaoImp.deleteLNiveau(niveauID);
 	}
 
 	@Override
 	public Niveau findNiveau(Long niveauID) {
-		// TODO Auto-generated method stub
+		
 		return userDaoImp.findNiveau(niveauID);
 	}
 
 	@Override
 	public Niveau findNiveauByName(String nomNiveau) {
-		// TODO Auto-generated method stub
+		
 		return userDaoImp.findNiveauByName(nomNiveau);
 	}
 
 	@Override
 	public List<Niveau> getAllNiveaux() {
-		// TODO Auto-generated method stub
+	
 		return userDaoImp.getAllNiveaux();
 	}
 	
-	@Override
-	public void addFI_M_D(FI_M_D F) {
-		userDaoImp.addFI_M_D(F);
-		
-	}
 
-	@Override
-	public void editFI_M_D(FI_M_D F) {
-		userDaoImp.editFI_M_D(F);
-		
-	}
-
-	@Override
-	public void deleteFI_M_D(Long F_ID) {
-		userDaoImp.deleteFI_M_D(F_ID);
-		
-	}
-
-	@Override
-	public FI_M_D findFI_M_D(Long F_ID) {
-		
-		return userDaoImp.findFI_M_D(F_ID);
-	}
-
-	@Override
-	public FI_M_D findFI_M_D_ByTitle(String FiName) {
-		
-		return userDaoImp.findFI_M_D_ByTitle(FiName);
-	}
-
-	@Override
-	public List<FI_M_D> getAllFI_D_M() {
-		
-		return userDaoImp.getAllFI_D_M();
-	}
-
-	@Override
-	public void addLC_D(LC_D L) {
-		userDaoImp.addLC_D(L);
-		
-	}
-
-	@Override
-	public void editLC_D(LC_D F) {
-		userDaoImp.editLC_D(F);
-		
-	}
-
-	@Override
-	public void deleteLC_D(Long F_ID) {
-		userDaoImp.deleteLC_D(F_ID);
-		
-	}
-
-	@Override
-	public LC_D findLC_D(Long F_ID) {
-		
-		return userDaoImp.findLC_D(F_ID);
-	}
-
-	@Override
-	public LC_D findLC_DByTitle(String FiName) {
-		
-		return userDaoImp.findLC_DByTitle(FiName);
-	}
-
-	@Override
-	public List<LC_D> getAllLC_D() {
-		
-		return userDaoImp.getAllLC_D();
-	}
 	
 	@Override
 	public void addModule(Module module) {
@@ -375,8 +305,8 @@ public class UserServiceImp implements UserServiceInt{
 	}
 
 	@Override
-	public void deleteLDocument(Long docID) {
-		userDaoImp.deleteLDocument(docID);
+	public void deleteLDocument(Long docID,Long documentId) {
+		userDaoImp.deleteLDocument(docID,documentId);
 		
 	}
 
@@ -404,4 +334,83 @@ public class UserServiceImp implements UserServiceInt{
 		return userDaoImp.getAllModulesByProfessor(uid);
 	}
 
+
+	@Override
+	public List<Niveau> findNiveauxByProps(Map<String, Object> props) {
+		return userDaoImp.findNiveauxByProps(props);
+	}
+
+
+	@Override
+	public void addDepartement(Departement departement) {
+		userDaoImp.addDepartement(departement);
+		
+	}
+
+	@Override
+	public void editDepartement(Departement departement) {
+		userDaoImp.editDepartement(departement);
+		
+	}
+
+	@Override
+	public void deleteDepartement(Long Dep_Id) {
+		userDaoImp.deleteDepartement(Dep_Id);
+		
+	}
+
+	@Override
+	public Departement findDepartement(Long Dep_Id) {
+		return userDaoImp.findDepartement(Dep_Id);
+	}
+
+	@Override
+	public Departement findDepByTitle(String DepTitle) {
+		return userDaoImp.findDepByTitle(DepTitle);
+	}
+
+	@Override
+	public List<Departement> getAllDepartements() {
+		return userDaoImp.getAllDepartements();
+	}
+
+	@Override
+	public List<Departement> getDepsByProps(Map<String, Object> props) {
+		return userDaoImp.getDepsByProps(props);
+	}
+
+	
+	
+	@Override
+	public void addFiliere(Filiere F) {
+		userDaoImp.addFiliere(F);
+		
+	}
+
+	@Override
+	public void editFiliere(Filiere F) {
+		userDaoImp.editFiliere(F);
+		
+	}
+
+	@Override
+	public void deleteFiliere(Long F_ID) {
+		userDaoImp.deleteFiliere(F_ID);
+		
+	}
+
+	@Override
+	public Filiere findFiliere(Long F_ID) {
+		return userDaoImp.findFiliere(F_ID);
+	}
+
+	@Override
+	public Filiere findFiliereByTitle(String FiName) {
+		return userDaoImp.findFiliereByTitle(FiName);
+	}
+
+	@Override
+	public List<Filiere> getAllFilieres() {
+		return userDaoImp.getAllFilieres();
+	}
 }

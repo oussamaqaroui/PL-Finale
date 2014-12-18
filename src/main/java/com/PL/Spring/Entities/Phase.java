@@ -15,7 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -40,130 +39,91 @@ public class Phase implements java.io.Serializable{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="PhaseID")
-	private Long PhaseID;
+	@Column(name="phaseID")
+	private Long phaseID;
 	
 	@NotEmpty
 	private String nomPhase;
 	
 	@NotEmpty
-	private String DescriptionPhase;
+	private String descriptionPhase;
 
 	private Date dateDPhase;
 	
 	private Date dateDFhase;
 	
-
-	
-	/*@ManyToMany(fetch= FetchType.LAZY , cascade=CascadeType.ALL)
-	@JoinTable(name = "phases_modules",  joinColumns = { 
-			@JoinColumn(name = "PhaseID", nullable = false, updatable = false) }, 
+	@ManyToMany(fetch= FetchType.EAGER , cascade=CascadeType.ALL)
+	@JoinTable(name = "filiere_module",  joinColumns = { 
+			@JoinColumn(name = "phaseID", nullable = false, updatable = false) }, 
 			inverseJoinColumns = { @JoinColumn(name = "ModuleID", 
-					nullable = false, updatable = false) })*/
-	@OneToMany//(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-	@JoinColumn(name="PhaseID")
-	private Collection<Module> Modules;
-
-
+					nullable = false, updatable = false) })
+	private Set<Niveau> modules;
 
 	public Long getPhaseID() {
-		return PhaseID;
+		return phaseID;
 	}
-
-
 
 	public void setPhaseID(Long phaseID) {
-		PhaseID = phaseID;
+		this.phaseID = phaseID;
 	}
-
-
 
 	public String getNomPhase() {
 		return nomPhase;
 	}
 
-
-
 	public void setNomPhase(String nomPhase) {
 		this.nomPhase = nomPhase;
 	}
 
-
-
 	public String getDescriptionPhase() {
-		return DescriptionPhase;
+		return descriptionPhase;
 	}
-
-
 
 	public void setDescriptionPhase(String descriptionPhase) {
-		DescriptionPhase = descriptionPhase;
+		this.descriptionPhase = descriptionPhase;
 	}
-
-
 
 	public Date getDateDPhase() {
 		return dateDPhase;
 	}
 
-
-
 	public void setDateDPhase(Date dateDPhase) {
 		this.dateDPhase = dateDPhase;
 	}
-
-
 
 	public Date getDateDFhase() {
 		return dateDFhase;
 	}
 
-
-
 	public void setDateDFhase(Date dateDFhase) {
 		this.dateDFhase = dateDFhase;
 	}
 
-
-
-	public Collection<Module> getModules() {
-		return Modules;
+	public Set<Niveau> getModules() {
+		return modules;
 	}
 
-
-
-	public void setModules(Collection<Module> modules) {
-		Modules = modules;
+	public void setModules(Set<Niveau> modules) {
+		this.modules = modules;
 	}
-
-
 
 	@Override
 	public String toString() {
-		return "Phase [PhaseID=" + PhaseID + ", nomPhase=" + nomPhase
-				+ ", DescriptionPhase=" + DescriptionPhase + ", dateDPhase="
-				+ dateDPhase + ", dateDFhase=" + dateDFhase + ", Modules="
-				+ Modules + "]";
+		return "Phase [phaseID=" + phaseID + ", nomPhase=" + nomPhase
+				+ ", descriptionPhase=" + descriptionPhase + ", dateDPhase="
+				+ dateDPhase + ", dateDFhase=" + dateDFhase + ", modules="
+				+ modules + "]";
 	}
-
-
 
 	public Phase(Long phaseID, String nomPhase, String descriptionPhase,
-			Date dateDPhase, Date dateDFhase, Collection<Module> modules) {
+			Date dateDPhase, Date dateDFhase, Set<Niveau> modules) {
 		super();
-		PhaseID = phaseID;
+		this.phaseID = phaseID;
 		this.nomPhase = nomPhase;
-		DescriptionPhase = descriptionPhase;
+		this.descriptionPhase = descriptionPhase;
 		this.dateDPhase = dateDPhase;
 		this.dateDFhase = dateDFhase;
-		Modules = modules;
-	}
-
-
-
-	public Phase() {
-		super();
-		// TODO Auto-generated constructor stub
+		this.modules = modules;
 	}
 	
 	

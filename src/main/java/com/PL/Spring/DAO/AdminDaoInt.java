@@ -17,4 +17,11 @@ public interface AdminDaoInt {
 	List<Admin> getAllAdmins();
 	
 	
+	
+	
+	
+
+
+	
+	
 }

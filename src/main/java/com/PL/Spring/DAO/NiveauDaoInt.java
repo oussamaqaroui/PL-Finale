@@ -3,6 +3,8 @@ package com.PL.Spring.DAO;
 import java.util.List;
 
 
+import java.util.Map;
+
 import com.PL.Spring.Entities.Niveau;
 
 public interface NiveauDaoInt {
@@ -13,5 +15,9 @@ public interface NiveauDaoInt {
 	Niveau  findNiveau(Long niveauID);
 	Niveau  findNiveauByName(String nomNiveau);
 	List<Niveau> getAllNiveaux();
+	
+	
+	
+	List<Niveau> findNiveauxByProps(Map<String,Object> props);
 	
 }

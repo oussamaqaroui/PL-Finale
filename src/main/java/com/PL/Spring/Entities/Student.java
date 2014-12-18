@@ -4,8 +4,13 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -46,9 +51,21 @@ public class Student extends User implements Serializable {
 	
 	private Date dateModification;
 
-	@ManyToMany(mappedBy="students")
-	private Collection<Niveau> Niveaux;
+	@ManyToMany(fetch= FetchType.EAGER , cascade=CascadeType.ALL)
+	@JoinTable(name = "niveaux_students",  joinColumns = { 
+			@JoinColumn(name = "user_id", nullable = false, updatable = false) }, 
+			inverseJoinColumns = { @JoinColumn(name = "NiveauID", 
+					nullable = false, updatable = false) })
+	private Set<Niveau> Niveaux;
 	
+	public Set<Niveau> getNiveaux() {
+		return Niveaux;
+	}
+
+	public void setNiveaux(Set<Niveau> niveaux) {
+		Niveaux = niveaux;
+	}
+
 	public String getNom() {
 		return nom;
 	}

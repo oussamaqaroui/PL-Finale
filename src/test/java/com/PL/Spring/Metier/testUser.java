@@ -42,6 +42,13 @@ public class testUser {
 	public void testAddUser() {
 		
 		
+		
+		
+		
+		
+		
+		
+		
 		/*Phase p=new Phase();
 		p.setNomPhase("phase3");
 		p.setDescriptionPhase("phase3 test");
@@ -128,8 +135,9 @@ public class testUser {
 	}
 
 	@Test
-	public void testDeleteUser() {
+	public void testDeletedoc() {
 		//metier.deleteUser(new Long(5));
+		//metier.deleteLDocument(new Long(5));
 	}
 
 	@Test

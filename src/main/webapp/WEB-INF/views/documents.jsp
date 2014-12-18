@@ -915,8 +915,27 @@
                                                <c:forEach items="${documents}" var="d">
                                                 <tr>
                                                     <td><a href="page_ready_elearning_course_lesson.html">${d.getNom()}</a></td>
-                                                    <td class="text-right"><a href="downloadfilen?docID=${d.getIdDoc()}" class="btn btn-xs btn-primary"><i class="fa fa-play"></i> Start</a></td>
+                                                    <td>${d.getDescription()}</td>
+                                                    <td class="text-right">
+                                                    
+                                                     <div class="btn-group btn-group-xs">
+                                                         <a href="delet?docId=${d.getIdDoc()}" data-toggle="tooltip" title="Delete" class="btn btn-danger"><i class="fa fa-times"></i></a>
+                                                         <a href="download?documentId=${d.getIdDoc()}" onclick="return confirm('Vous voulez suprrimer ce document ?')" class="btn btn-default" data-toggle="tooltip" title="Download"><i class="fa fa-cloud-download"></i></a>
+                                              
+                                                    
+                                                    </div>
+                                                    
+                                                    
+                                                    </td>
+                                                
+                                                
+                                                
+                                                
+                                               
                                                 </tr>
+                                               
+                                               
+                                             
                                                 </c:forEach>
                                                
                                             </tbody>
@@ -1018,121 +1037,64 @@
                             <div class="block">
                                 <!-- Most Viewed Courses Title -->
                                 <div class="block-title">
-                                    <h2><strong>Most Viewed</strong> Courses</h2>
+                                    <h2><strong>Ajouter</strong> Document</h2>
                                 </div>
                                 <!-- END Most Viewed Courses Title -->
 
                                 <!-- Most Viewed Courses Content -->
                                 <table class="table table-striped table-vcenter">
                                     <tbody>
-                                        <tr>
-                                            <td>
-                                                <a href="page_ready_elearning_course_lessons.html">Intro to HTML5</a><br>
-                                                <small>Web Design</small>
-                                            </td>
-                                            <td class="text-center" style="width: 70px;">
-                                                <div class="btn-group btn-group-xs">
-                                                    <a href="javascript:void(0)" class="btn btn-default"><i class="fa fa-shopping-cart"></i></a>
-                                                    <a href="javascript:void(0)" class="btn btn-default"><i class="fa fa-heart text-danger"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <a href="page_ready_elearning_course_lessons.html">Vector Graphics</a><br>
-                                                <small>Design &amp; Illustration</small>
-                                            </td>
-                                            <td class="text-center">
-                                                <div class="btn-group btn-group-xs">
-                                                    <a href="javascript:void(0)" class="btn btn-default"><i class="fa fa-shopping-cart"></i></a>
-                                                    <a href="javascript:void(0)" class="btn btn-default"><i class="fa fa-heart text-danger"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <a href="page_ready_elearning_course_lessons.html">Using Cinema 4D</a><br>
-                                                <small>3D & Motion Graphics</small>
-                                            </td>
-                                            <td class="text-center">
-                                                <div class="btn-group btn-group-xs">
-                                                    <a href="javascript:void(0)" class="btn btn-default"><i class="fa fa-shopping-cart"></i></a>
-                                                    <a href="javascript:void(0)" class="btn btn-default"><i class="fa fa-heart text-danger"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <a href="page_ready_elearning_course_lessons.html">Intro to Illustrator</a><br>
-                                                <small>Design &amp; Illustration</small>
-                                            </td>
-                                            <td class="text-center">
-                                                <div class="btn-group btn-group-xs">
-                                                    <a href="javascript:void(0)" class="btn btn-default"><i class="fa fa-shopping-cart"></i></a>
-                                                    <a href="javascript:void(0)" class="btn btn-default"><i class="fa fa-heart text-danger"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <a href="page_ready_elearning_course_lessons.html">Photoshop for Photographers</a><br>
-                                                <small>Photography</small>
-                                            </td>
-                                            <td class="text-center">
-                                                <div class="btn-group btn-group-xs">
-                                                    <a href="javascript:void(0)" class="btn btn-default"><i class="fa fa-shopping-cart"></i></a>
-                                                    <a href="javascript:void(0)" class="btn btn-default"><i class="fa fa-heart text-danger"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <a href="page_ready_elearning_course_lessons.html">Learn Javascript in a Month</a><br>
-                                                <small>Code</small>
-                                            </td>
-                                            <td class="text-center">
-                                                <div class="btn-group btn-group-xs">
-                                                    <a href="javascript:void(0)" class="btn btn-default"><i class="fa fa-shopping-cart"></i></a>
-                                                    <a href="javascript:void(0)" class="btn btn-default"><i class="fa fa-heart text-danger"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <a href="page_ready_elearning_course_lessons.html">Intro to Lightroom</a><br>
-                                                <small>Photography</small>
-                                            </td>
-                                            <td class="text-center">
-                                                <div class="btn-group btn-group-xs">
-                                                    <a href="javascript:void(0)" class="btn btn-default"><i class="fa fa-shopping-cart"></i></a>
-                                                    <a href="javascript:void(0)" class="btn btn-default"><i class="fa fa-heart text-danger"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <a href="page_ready_elearning_course_lessons.html">Learn CSS3 in a Week</a><br>
-                                                <small>Web Design</small>
-                                            </td>
-                                            <td class="text-center">
-                                                <div class="btn-group btn-group-xs">
-                                                    <a href="javascript:void(0)" class="btn btn-default"><i class="fa fa-shopping-cart"></i></a>
-                                                    <a href="javascript:void(0)" class="btn btn-default"><i class="fa fa-heart text-danger"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <a href="page_ready_elearning_course_lessons.html">Jquery: The Essentials</a><br>
-                                                <small>Code</small>
-                                            </td>
-                                            <td class="text-center">
-                                                <div class="btn-group btn-group-xs">
-                                                    <a href="javascript:void(0)" class="btn btn-default"><i class="fa fa-shopping-cart"></i></a>
-                                                    <a href="javascript:void(0)" class="btn btn-default"><i class="fa fa-heart text-danger"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                    
+                                   <!-- <div class="block">-->
+                                    
+                                
+                                    <!--  <form modelAttribute="admin" action="saveAdmin" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered" >--> 
+                                    <f:form modelAttribute="document" action="saveFile" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered" >
+                                    
+
+									<div class="form-group">
+                                        <label class="col-md-3 control-label" for="example-file-input">File input</label>
+                                        <div class="col-md-9">
+                                            <input name="fichier" type="file" id="fichier" >
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label" for="example-textarea-input">Textarea</label>
+                                        <div class="col-md-9">
+                                            <f:textarea path="description" id="example-textarea-input" name="example-textarea-input" rows="9" class="form-control" placeholder="Content.."/></textarea>
+                                        </div>
+                                    </div>
+
+									
+									
+									
+									
+									<div class="form-group form-actions">
+                                        <div class="col-md-9 col-md-offset-3">
+                                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Submit</button>
+                                            
+                                        </div>
+                                    </div>
+									
+								
+                                   </f:form>
+                                   
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                <!--    </div>-->
                                     </tbody>
                                 </table>
                                 <!-- END Most Viewed Courses Content -->

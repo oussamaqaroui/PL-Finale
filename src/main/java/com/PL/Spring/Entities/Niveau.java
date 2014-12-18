@@ -2,6 +2,7 @@ package com.PL.Spring.Entities;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,7 +12,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -21,34 +24,89 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="Niveaux")
-public class Niveau implements java.io.Serializable{
+public class Niveau implements java.io.Serializable,Comparable<Niveau>{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="NiveauID")
-	private Long NiveauID;
+	@Column(name="niveauID")
+	private Long niveauID;
 	
-	@ManyToMany
-	private Collection<Student> students;
+	//A modifier pour avoir la clé primaire composée dans la table résultante students_niveaux
+	@ManyToMany(fetch= FetchType.EAGER , cascade=CascadeType.ALL)
+	@JoinTable(name = "niveaux_students",  joinColumns = { 
+			@JoinColumn(name = "NiveauID", nullable = false, updatable = false) }, 
+			inverseJoinColumns = { @JoinColumn(name = "user_id", 
+					nullable = false, updatable = false) })
+	private Set<Student> students; // Set et non collection pour avoir une clé primaire composée des deux dans niveaux_student
 	
-	@OneToMany
-	@JoinColumn(name="NiveauID")
-	private Collection<Phase> Phases;
+	/// mot de passe problème dans l'edition taydir md5 dial md5
+	@OneToMany(fetch= FetchType.EAGER , cascade=CascadeType.ALL)
+	@JoinColumn(name="niveauID")
+	private Set<Phase> Phases;
 	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="f_ID")
+	private Filiere filiere;
+	
+	
+	public Filiere getFiliere() {
+		return filiere;
+	}
+
+
+	public void setFiliere(Filiere filiere) {
+		this.filiere = filiere;
+	}
+
+
 	@NotEmpty
 	private String nomNiveau;
 	
-	@NotEmpty
-	private String DescriptionNiveau;
+
+	//@NotEmpty
+	private String descriptionNiveau;
 	
 	private Date dateDebut;
 	
 	private Date dateFin;
 	
-	private String annescolaire;
+	//private String annescolaire;
+	
+	//private boolean active;
+	
 
 	
 	
+	public Collection<Student> getStudents() {
+		return students;
+	}
+
+
+	public void setStudents(Set<Student> students) {
+		this.students = students;
+	}
+
+
+	public Set<Phase> getPhases() {
+		return Phases;
+	}
+
+
+	public void setPhases(Set<Phase> phases) {
+		Phases = phases;
+	}
+
+/*
+	public boolean isActive() {
+		return active;
+	}
+
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+*/
+
 	public Niveau() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -56,11 +114,11 @@ public class Niveau implements java.io.Serializable{
 
 	
 	public Long getNiveauID() {
-		return NiveauID;
+		return niveauID;
 	}
 
-	public void setNiveauID(Long niveauID) {
-		NiveauID = niveauID;
+	public void setNiveauID(Long nniveauID) {
+		niveauID = nniveauID;
 	}
 
 	
@@ -74,11 +132,11 @@ public class Niveau implements java.io.Serializable{
 	}
 
 	public String getDescriptionNiveau() {
-		return DescriptionNiveau;
+		return descriptionNiveau;
 	}
 
-	public void setDescriptionNiveau(String descriptionNiveau) {
-		DescriptionNiveau = descriptionNiveau;
+	public void setDescriptionNiveau(String ddescriptionNiveau) {
+		descriptionNiveau = ddescriptionNiveau;
 	}
 
 	public Date getDateDebut() {
@@ -97,6 +155,7 @@ public class Niveau implements java.io.Serializable{
 		this.dateFin = dateFin;
 	}
 
+	/*
 	public String getAnnescolaire() {
 		return annescolaire;
 	}
@@ -105,30 +164,39 @@ public class Niveau implements java.io.Serializable{
 		this.annescolaire = annescolaire;
 	}
 
-
+	*/
 	@Override
 	public String toString() {
-		return "Niveau [NiveauID=" + NiveauID + ", students=" + students
+		return "Niveau [NiveauID=" + niveauID + ", students=" + students
 				+ ", Phases=" + Phases + ", nomNiveau=" + nomNiveau
-				+ ", DescriptionNiveau=" + DescriptionNiveau + ", dateDebut="
-				+ dateDebut + ", dateFin=" + dateFin + ", annescolaire="
-				+ annescolaire + "]";
+				+ ", DescriptionNiveau=" + descriptionNiveau + ", dateDebut="
+				+ dateDebut + ", dateFin=" + dateFin + "]";
+				//+ ", annescolaire="+ annescolaire 
+				
 	}
 
 
-	public Niveau(Long niveauID, Collection<Student> students,
-			Collection<Phase> phases, String nomNiveau,
-			String descriptionNiveau, Date dateDebut, Date dateFin,
-			String annescolaire) {
+	public Niveau(Long nniveauID, Set<Student> students,
+			Set<Phase> phases, String nomNiveau,
+			String ddescriptionNiveau, Date dateDebut, Date dateFin
+			//,String annescolaire
+			) 
+	{
 		super();
-		NiveauID = niveauID;
+		niveauID = nniveauID;
 		this.students = students;
 		Phases = phases;
 		this.nomNiveau = nomNiveau;
-		DescriptionNiveau = descriptionNiveau;
+		descriptionNiveau = ddescriptionNiveau;
 		this.dateDebut = dateDebut;
 		this.dateFin = dateFin;
-		this.annescolaire = annescolaire;
+		//this.annescolaire = annescolaire;
+	}
+
+
+	@Override
+	public int compareTo(Niveau o) {
+		return this.niveauID.compareTo(o.niveauID);
 	}
 	
 	

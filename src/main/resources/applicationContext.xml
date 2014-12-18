@@ -64,6 +64,7 @@
         <s:intercept-url pattern="/studentUsers/*" access="hasAnyRole('ROLE_ADMIN_PR','ROLE_ADMIN')"/>
         <s:intercept-url pattern="/professorUsers/*" access="hasAnyRole('ROLE_ADMIN_PR','ROLE_ADMIN')"/>
         <s:intercept-url pattern="/interfaceProfessor/*" access="hasAnyRole('ROLE_PROFESSOR','ROLE_ADMIN','ROLE_ADMIN_PR')"/>
+        <s:intercept-url pattern="/Niveaux/*" access="hasAnyRole('ROLE_ADMIN_PR','ROLE_ADMIN')"/>
         <s:session-management invalid-session-url="/login" />
         <s:form-login login-page="/login"
         		default-target-url="/"

@@ -1,6 +1,7 @@
 package com.PL.Spring.DAO;
 
 import java.util.List;
+import java.util.Map;
 
 import com.PL.Spring.Entities.Departement;
 import com.PL.Spring.Entities.Professor;
@@ -15,4 +16,5 @@ public interface DepartementDaoInt {
 	List<Departement> getAllDepartements();
 	
 
+	List<Departement> getDepsByProps(Map<String,Object> props);
 }

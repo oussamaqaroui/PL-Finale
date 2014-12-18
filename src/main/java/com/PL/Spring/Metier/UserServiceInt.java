@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.PL.Spring.Entities.Admin;
+import com.PL.Spring.Entities.Departement;
 import com.PL.Spring.Entities.Document;
-import com.PL.Spring.Entities.FI_M_D;
-import com.PL.Spring.Entities.LC_D;
+import com.PL.Spring.Entities.Filiere;
 import com.PL.Spring.Entities.Module;
 import com.PL.Spring.Entities.Niveau;
 import com.PL.Spring.Entities.Phase;
@@ -46,7 +46,10 @@ public interface UserServiceInt {
 	Student findStudentByName(String username);
 	List<Student> getAllStudents();
 	List<Student> findStudentByProps(Map<String,Object> props);
-
+	
+	
+	
+	
 	void addPhase(Phase phase);
 	void editPhase(Phase phase);
 	void deletePhase(Long phaseID);
@@ -54,29 +57,19 @@ public interface UserServiceInt {
 	Phase  findPhaseByName(String nomPhase);
 	List<Phase> getAllPhase();
 	
+	
+	
+	
 	void addNiveau(Niveau niveau);
 	void editNiveau(Niveau niveau);
 	void deleteLNiveau(Long niveauID);
 	Niveau  findNiveau(Long niveauID);
 	Niveau  findNiveauByName(String nomNiveau);
 	List<Niveau> getAllNiveaux();
-	
-	void addFI_M_D(FI_M_D F);
-	void editFI_M_D(FI_M_D F);
-	void deleteFI_M_D(Long F_ID);
-	FI_M_D  findFI_M_D(Long F_ID);
-	FI_M_D findFI_M_D_ByTitle(String FiName);
-	List<FI_M_D> getAllFI_D_M();
+	List<Niveau> findNiveauxByProps(Map<String,Object> props);
 	
 	
-	
-	void addLC_D(LC_D L);
-	void editLC_D(LC_D F);
-	void deleteLC_D(Long F_ID);
-	LC_D  findLC_D(Long F_ID);
-	LC_D findLC_DByTitle(String FiName);
-	List<LC_D> getAllLC_D();
-	
+
 	void addModule(Module module);
 	void editModule(Module module);
 	void deleteLModule(Long moduleID);
@@ -87,10 +80,30 @@ public interface UserServiceInt {
 	
 	void addDocument(Document doc);
 	void editDocument(Document doc);
-	void deleteLDocument(Long docID);
+	void deleteLDocument(Long docID,Long moduleId);
 	Document findDocument(Long docID);
 	Document findDocumentByTitle(String nomdoc);
 	List<Document> getAllDocuments();
 	
 
+	
+	void addDepartement(Departement departement);
+	void editDepartement(Departement departement);
+	void deleteDepartement(Long Dep_Id);
+	Departement  findDepartement(Long Dep_Id);
+	Departement findDepByTitle(String DepTitle);
+	List<Departement> getAllDepartements();
+	List<Departement> getDepsByProps(Map<String,Object> props);
+	
+	
+	
+	void addFiliere(Filiere F);
+	void editFiliere(Filiere F);
+	void deleteFiliere(Long F_ID);
+	Filiere findFiliere(Long F_ID);
+	Filiere findFiliereByTitle(String FiName);
+	List<Filiere> getAllFilieres();
+	
+	
+	
 }

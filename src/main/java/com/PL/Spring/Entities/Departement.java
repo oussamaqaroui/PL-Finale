@@ -15,96 +15,94 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Departement")
+@Table(name="Departements")
 public class Departement {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="Dep_ID")
-	private Long Dep_ID;
+	@Column(name="dep_ID")
+	private Long dep_ID;
 	
-	private String Title;
-	private String Description;
+	private String title;
+	private String description;
 	
 	/*@OneToOne
 	@JoinColumn(name="HeadOfDep")
-	private Professor HeadOfDep;*/
+	private Professor headOfDep;*/
 	
 	@OneToMany
-	@JoinColumn(name="Dep_ID")
-	private Collection<Professor> Instroctors;
+	@JoinColumn(name="dep_ID")
+	private Collection<Professor> instroctors;
 	
 	@OneToMany
-	@JoinColumn(name="Dep_ID")
-	private Collection<FI_M_D> FMDS;
+	@JoinColumn(name="dep_ID")
+	private Collection<Filiere> filieres;
 
 	public Long getDep_ID() {
-		return Dep_ID;
+		return dep_ID;
 	}
 
 	public void setDep_ID(Long dep_ID) {
-		Dep_ID = dep_ID;
+		this.dep_ID = dep_ID;
 	}
 
 	public String getTitle() {
-		return Title;
+		return title;
 	}
 
 	public void setTitle(String title) {
-		Title = title;
+		this.title = title;
 	}
 
 	public String getDescription() {
-		return Description;
+		return description;
 	}
 
 	public void setDescription(String description) {
-		Description = description;
+		this.description = description;
 	}
 
-/*	public Professor getHeadOfDep() {
-		return HeadOfDep;
-	}
-
-	public void setHeadOfDep(Professor headOfDep) {
-		HeadOfDep = headOfDep;
-	}
-*/
 	public Collection<Professor> getInstroctors() {
-		return Instroctors;
+		return instroctors;
 	}
 
 	public void setInstroctors(Collection<Professor> instroctors) {
-		Instroctors = instroctors;
+		this.instroctors = instroctors;
 	}
 
-	public Collection<FI_M_D> getFMDS() {
-		return FMDS;
+	public Collection<Filiere> getFilieres() {
+		return filieres;
 	}
 
-	public void setFMDS(Collection<FI_M_D> fMDS) {
-		FMDS = fMDS;
-	}
-
-
-	
-	public Departement(Long dep_ID, String title, String description,
-			Collection<Professor> instroctors, Collection<FI_M_D> fMDS) {
-		super();
-		Dep_ID = dep_ID;
-		Title = title;
-		Description = description;
-		Instroctors = instroctors;
-		FMDS = fMDS;
+	public void setFilieres(Collection<Filiere> filieres) {
+		this.filieres = filieres;
 	}
 
 	@Override
 	public String toString() {
-		return "Departement [Dep_ID=" + Dep_ID + ", Title=" + Title
-				+ ", Description=" + Description + ", Instroctors="
-				+ Instroctors + ", FMDS=" + FMDS + "]";
+		return "Departement [dep_ID=" + dep_ID + ", title=" + title
+				+ ", description=" + description + ", instroctors="
+				+ instroctors + ", filieres=" + filieres + "]";
 	}
 
-	public Departement(){}
+	public Departement(Long dep_ID, String title, String description,
+			Collection<Professor> instroctors, Collection<Filiere> filieres) {
+		super();
+		this.dep_ID = dep_ID;
+		this.title = title;
+		this.description = description;
+		this.instroctors = instroctors;
+		this.filieres = filieres;
+	}
 
+	public Departement() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
+	
+	
+	
+	
 }

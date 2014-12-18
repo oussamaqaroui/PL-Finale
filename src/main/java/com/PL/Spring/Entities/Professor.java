@@ -21,6 +21,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Table(name="Professors")
 @PrimaryKeyJoinColumn(name="user_id")
 public class Professor extends User implements Serializable {
+	
 
 	private static final long serialVersionUID = -3939879473294951527L;
 	
@@ -42,110 +43,18 @@ public class Professor extends User implements Serializable {
 	
 	private Date dateModification;
 	
-	@OneToMany//(fetch = FetchType.EAGER)//,cascade = CascadeType
-	@JoinColumn(name="user_id")
-	private Collection<Module> Modules;
-	
-	/*@OneToOne(mappedBy="HeadOfDep",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	/*@OneToOne(mappedBy="HeadOfDep",cascade = CascadeType.ALL)
 	private Departement HDep;//Departement pour lequel il est chef
 */	
-	
-
-	public String getNom() {
-		return nom;
-	}
-
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
-
-	public String getPrenom() {
-		return prenom;
-	}
-
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public byte[] getPhoto() {
-		return photo;
-	}
-
-	public void setPhoto(byte[] photo) {
-		this.photo = photo;
-	}
-
-	public Date getDateNaissance() {
-		return dateNaissance;
-	}
-
-	public void setDateNaissance(Date dateNaissance) {
-		this.dateNaissance = dateNaissance;
-	}
-
-	public String getAdresse() {
-		return adresse;
-	}
-
-	public void setAdresse(String adresse) {
-		this.adresse = adresse;
-	}
-
-	public Date getDateCreation() {
-		return dateCreation;
-	}
-
-	public void setDateCreation(Date dateCreation) {
-		this.dateCreation = dateCreation;
-	}
-
-	public Date getDateModification() {
-		return dateModification;
-	}
-
-	public void setDateModification(Date dateModification) {
-		this.dateModification = dateModification;
-	}
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name="user_id")
+	private Collection<Module> Modules;
 
 	
+	
+	
+	
 
-	public Professor() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-/*	public Departement getHDep() {
-		return HDep;
-	}
-
-	public void setHDep(Departement hDep) {
-		HDep = hDep;
-	}*/
-
-	public Collection<Module> getModules() {
-		return Modules;
-	}
-
-	public void setModules(Collection<Module> modules) {
-		Modules = modules;
-	}
-
-	@Override
-	public String toString() {
-		return "Professor [nom=" + nom + ", prenom=" + prenom + ", email="
-				+ email + ", photo=" + Arrays.toString(photo)
-				+ ", dateNaissance=" + dateNaissance + ", adresse=" + adresse
-				+ ", dateCreation=" + dateCreation + ", dateModification="
-				+ dateModification + ", Modules=" + Modules + "]";
-	}
 
 	public Professor(String nom, String prenom, String email, byte[] photo,
 			Date dateNaissance, String adresse, Date dateCreation,
@@ -163,7 +72,209 @@ public class Professor extends User implements Serializable {
 	}
 
 
-	
-	
-	
+
+
+
+
+
+	@Override
+	public String toString() {
+		return "Professor [nom=" + nom + ", prenom=" + prenom + ", email="
+				+ email + ", photo=" + Arrays.toString(photo)
+				+ ", dateNaissance=" + dateNaissance + ", adresse=" + adresse
+				+ ", dateCreation=" + dateCreation + ", dateModification="
+				+ dateModification + ", Modules=" + Modules + "]";
+	}
+
+
+
+
+
+
+
+	public String getNom() {
+		return nom;
+	}
+
+
+
+
+
+
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+
+
+
+
+
+
+	public String getPrenom() {
+		return prenom;
+	}
+
+
+
+
+
+
+
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
+
+
+
+
+
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+
+
+
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+
+
+
+
+
+	public byte[] getPhoto() {
+		return photo;
+	}
+
+
+
+
+
+
+
+	public void setPhoto(byte[] photo) {
+		this.photo = photo;
+	}
+
+
+
+
+
+
+
+	public Date getDateNaissance() {
+		return dateNaissance;
+	}
+
+
+
+
+
+
+
+	public void setDateNaissance(Date dateNaissance) {
+		this.dateNaissance = dateNaissance;
+	}
+
+
+
+
+
+
+
+	public String getAdresse() {
+		return adresse;
+	}
+
+
+
+
+
+
+
+	public void setAdresse(String adresse) {
+		this.adresse = adresse;
+	}
+
+
+
+
+
+
+
+	public Date getDateCreation() {
+		return dateCreation;
+	}
+
+
+
+
+
+
+
+	public void setDateCreation(Date dateCreation) {
+		this.dateCreation = dateCreation;
+	}
+
+
+
+
+
+
+
+	public Date getDateModification() {
+		return dateModification;
+	}
+
+
+
+
+
+
+
+	public void setDateModification(Date dateModification) {
+		this.dateModification = dateModification;
+	}
+
+
+
+
+
+
+
+	public Collection<Module> getModules() {
+		return Modules;
+	}
+
+
+
+
+
+
+
+	public void setModules(Collection<Module> modules) {
+		Modules = modules;
+	}
+
+
+
+
+
+
+
+	public Professor() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 }

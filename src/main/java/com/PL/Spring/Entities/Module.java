@@ -25,7 +25,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
 @Table(name="Module")
-public class Module implements java.io.Serializable{
+public class Module implements java.io.Serializable,Comparable<Module>{
 	/**
 	 * 
 	 */
@@ -41,18 +41,17 @@ public class Module implements java.io.Serializable{
 	
 	
 	
-	/*@ManyToMany(fetch= FetchType.LAZY , cascade=CascadeType.ALL)
-	@JoinTable(name = "phases_modules",  joinColumns = { 
+	@ManyToMany(fetch= FetchType.EAGER , cascade=CascadeType.ALL)
+	@JoinTable(name = "filiere_module",  joinColumns = { 
 			@JoinColumn(name = "ModuleID", nullable = false, updatable = false) }, 
-			inverseJoinColumns = { @JoinColumn(name = "PhaseID", 
+			inverseJoinColumns = { @JoinColumn(name = "phaseID", 
 					nullable = false, updatable = false) })
-	@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-	private Set<Phase> Phases;*/
+	private Set<Phase> phases;
 	
 	
 	@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL) // eager parce qu'il ne trouve pas les role et cascade problème d'enregistrement des fils avant le père
 	@JoinColumn(name="ModuleID")
-	private Collection<Document> docs;
+	private Set<Document> docs;
 	
 	@NotEmpty
 	private String nomModule;
@@ -64,9 +63,11 @@ public class Module implements java.io.Serializable{
 	private int NombreHeures;
 
 
+
 	public Long getModuleID() {
 		return ModuleID;
 	}
+
 
 
 	public void setModuleID(Long moduleID) {
@@ -74,14 +75,29 @@ public class Module implements java.io.Serializable{
 	}
 
 
-	public Collection<Document> getDocs() {
+
+	public Collection<Phase> getPhases() {
+		return phases;
+	}
+
+
+
+	public void setPhases(Set<Phase> phases) {
+		this.phases = phases;
+	}
+
+
+
+	public Set<Document> getDocs() {
 		return docs;
 	}
 
 
-	public void setDocs(Collection<Document> docs) {
+
+	public void setDocs(Set<Document> docs) {
 		this.docs = docs;
 	}
+
 
 
 	public String getNomModule() {
@@ -89,9 +105,11 @@ public class Module implements java.io.Serializable{
 	}
 
 
+
 	public void setNomModule(String nomModule) {
 		this.nomModule = nomModule;
 	}
+
 
 
 	public String getDescriptionModule() {
@@ -99,9 +117,11 @@ public class Module implements java.io.Serializable{
 	}
 
 
+
 	public void setDescriptionModule(String descriptionModule) {
 		DescriptionModule = descriptionModule;
 	}
+
 
 
 	public int getNombreHeures() {
@@ -109,23 +129,21 @@ public class Module implements java.io.Serializable{
 	}
 
 
+
 	public void setNombreHeures(int nombreHeures) {
 		NombreHeures = nombreHeures;
 	}
 
-
-	@Override
-	public String toString() {
-		return "Module [ModuleID=" + ModuleID + ", docs=" + docs
-				+ ", nomModule=" + nomModule + ", DescriptionModule="
-				+ DescriptionModule + ", NombreHeures=" + NombreHeures + "]";
-	}
+	
+	
+	
 
 
-	public Module(Long moduleID, Collection<Document> docs, String nomModule,
-			String descriptionModule, int nombreHeures) {
+	public Module(Long moduleID, Set<Phase> phases, Set<Document> docs,
+			String nomModule, String descriptionModule, int nombreHeures) {
 		super();
 		ModuleID = moduleID;
+		this.phases = phases;
 		this.docs = docs;
 		this.nomModule = nomModule;
 		DescriptionModule = descriptionModule;
@@ -133,9 +151,27 @@ public class Module implements java.io.Serializable{
 	}
 
 
+
+	@Override
+	public String toString() {
+		return "Module [ModuleID=" + ModuleID + ", phases=" + phases
+				+ ", docs=" + docs + ", nomModule=" + nomModule
+				+ ", DescriptionModule=" + DescriptionModule
+				+ ", NombreHeures=" + NombreHeures + "]";
+	}
+
+
+
 	public Module() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+
+
+	@Override
+	public int compareTo(Module arg0) {
+		return this.ModuleID.compareTo(arg0.ModuleID);
 	}
 
 

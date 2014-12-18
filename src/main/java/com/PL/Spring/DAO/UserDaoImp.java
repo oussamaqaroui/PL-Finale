@@ -14,8 +14,9 @@ import javax.persistence.Query;
 import com.PL.Spring.Entities.Admin;
 import com.PL.Spring.Entities.Departement;
 import com.PL.Spring.Entities.Document;
-import com.PL.Spring.Entities.FI_M_D;
-import com.PL.Spring.Entities.LC_D;
+
+import com.PL.Spring.Entities.Filiere;
+
 import com.PL.Spring.Entities.Module;
 import com.PL.Spring.Entities.Niveau;
 import com.PL.Spring.Entities.Phase;
@@ -27,7 +28,7 @@ import com.PL.Spring.Entities.User;
 
 
 public class UserDaoImp implements UserDaoInt,AdminDaoInt,StudentDaoInt,ProfessorDaoInt,DepartementDaoInt
-,PhaseDaoInt,NiveauDaoInt,FI_M_D_DaoInt,LC_D_DaoInt,ModuleDaoInt,DocumentDaoInt
+,PhaseDaoInt,NiveauDaoInt,FiliereDaoInt,ModuleDaoInt,DocumentDaoInt
 
 {
 
@@ -366,80 +367,7 @@ public class UserDaoImp implements UserDaoInt,AdminDaoInt,StudentDaoInt,Professo
 		return query.getResultList();
 	}
 	
-	@Override
-	public void addFI_M_D(FI_M_D F) {
-		em.persist(F);
-		
-	}
 
-	@Override
-	public void editFI_M_D(FI_M_D F) {
-		this.em.merge(F);
-		
-	}
-
-	@Override
-	public void deleteFI_M_D(Long F_ID) {
-		FI_M_D d=em.getReference(FI_M_D.class, F_ID);
-		em.remove(d);
-		
-	}
-
-	@Override
-	public FI_M_D findFI_M_D(Long F_ID) {
-		return em.find(FI_M_D.class, F_ID);
-	}
-
-	@Override
-	public FI_M_D findFI_M_D_ByTitle(String FiName) {
-		Query query=this.em.createQuery("SELECT o from FI_M_D o where o.Title =:nomf");
-		query.setParameter("nomf", FiName);
-		return (FI_M_D)query.getSingleResult();
-	}
-
-	@Override
-	public List<FI_M_D> getAllFI_D_M() {
-		Query query=this.em.createQuery("SELECT o from FI_M_D o");
-		return query.getResultList();
-	}
-
-	@Override
-	public void addLC_D(LC_D L) {
-		em.persist(L);
-		
-	}
-
-	@Override
-	public void editLC_D(LC_D F) {
-		em.merge(F);
-		
-	}
-
-	@Override
-	public void deleteLC_D(Long F_ID) {
-		LC_D d=em.getReference(LC_D.class, F_ID);
-		em.remove(d);
-		
-	}
-
-	@Override
-	public LC_D findLC_D(Long F_ID) {
-		return em.find(LC_D.class, F_ID);
-	}
-
-	@Override
-	public LC_D findLC_DByTitle(String FiName) {
-		Query query=this.em.createQuery("SELECT o from LC_D o where o.Title =:nomf");
-		query.setParameter("nomf", FiName);
-		return (LC_D)query.getSingleResult();
-	}
-
-	@Override
-	public List<LC_D> getAllLC_D() {
-		Query query=this.em.createQuery("SELECT o from LC_D o");
-		return query.getResultList();
-	}
-	
 	@Override
 	public void addModule(Module module) {
 			em.persist(module);
@@ -536,8 +464,13 @@ public class UserDaoImp implements UserDaoInt,AdminDaoInt,StudentDaoInt,Professo
 	}
 
 	@Override
-	public void deleteLDocument(Long docID) {
+	public void deleteLDocument(Long docID, Long moduleId) {
+		Module m=em.getReference(Module.class, moduleId);
+		
 		Document d=em.getReference(Document.class, docID);
+		m.getDocs().remove(d);
+	    em.merge(m);
+		
 		em.remove(d);
 		
 	}
@@ -559,6 +492,107 @@ public class UserDaoImp implements UserDaoInt,AdminDaoInt,StudentDaoInt,Professo
 		Query query=this.em.createQuery("SELECT o from Document o");
 		return query.getResultList();
 	}
+
+	
+	
+	
+	
+	
+	
+	
+
+	@Override
+	public void addFiliere(Filiere F) {
+		em.persist(F);
+		
+	}
+
+	@Override
+	public void editFiliere(Filiere F) {
+		em.merge(F);
+		
+	}
+
+	@Override
+	public void deleteFiliere(Long F_ID) {
+		Filiere f=em.getReference(Filiere.class,F_ID );
+		em.remove(f);
+		
+	}
+
+	@Override
+	public Filiere findFiliere(Long F_ID) {
+		return em.find(Filiere.class, F_ID);
+	}
+
+	@Override
+	public Filiere findFiliereByTitle(String FiName) {
+		Query query=this.em.createQuery("SELECT o from Filiere o where o.title =:nomf");
+		query.setParameter("nomf", FiName);
+		return (Filiere) query.getSingleResult();
+	}
+
+	@Override
+	public List<Filiere> getAllFilieres() {
+		Query query=this.em.createQuery("SELECT o from Filiere o");
+		return query.getResultList();
+	}
+
+	@Override
+	public List<Niveau> findNiveauxByProps(Map<String, Object> props) {
+String req=new String("select o from Niveau o where ");
+		
+		//Construction de la requete
+		
+		Iterator it=props.keySet().iterator();
+		
+		while(it.hasNext())
+		{
+			String aide =(String)it.next();
+			req+="o."+aide+" = :"+aide;
+			if(it.hasNext())req+=" and ";
+		}
+		
+		//Creation de la requete 
+		Query query=this.em.createQuery(req);
+		
+		//Affectation des parametre
+		for(Entry<String,Object> e:props.entrySet())
+		{
+			query.setParameter(e.getKey(), e.getValue());
+		}
+		
+		return  query.getResultList();
+	}
+
+	@Override
+	public List<Departement> getDepsByProps(Map<String, Object> props) {
+String req=new String("select o from Departement o where ");
+		
+		//Construction de la requete
+		
+		Iterator it=props.keySet().iterator();
+		
+		while(it.hasNext())
+		{
+			String aide =(String)it.next();
+			req+="o."+aide+" = :"+aide;
+			if(it.hasNext())req+=" and ";
+		}
+		
+		//Creation de la requete 
+		Query query=this.em.createQuery(req);
+		
+		//Affectation des parametre
+		for(Entry<String,Object> e:props.entrySet())
+		{
+			query.setParameter(e.getKey(), e.getValue());
+		}
+		
+		return  query.getResultList();
+	
+	}
+
 
 
 }

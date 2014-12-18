@@ -3,6 +3,7 @@ package com.PL.Spring.Entities;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Date;
+import java.sql.Blob;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +14,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name="Document")
@@ -38,11 +40,14 @@ public class Document implements Serializable{
 	public void setIdDoc(Long idDoc) {
 		this.idDoc = idDoc;
 	}
-
-	@NotEmpty
+	
+	private String type;
+	
+	private String description;
+	
 	private String nom;
 	@Lob
-	private byte[] fichier;
+	 private Blob fichier;
 	
 	private Document correction;
 	
@@ -64,13 +69,7 @@ public class Document implements Serializable{
 		this.nom = nom;
 	}
 
-	public byte[] getFichier() {
-		return fichier;
-	}
-
-	public void setFichier(byte[] fichier) {
-		this.fichier = fichier;
-	}
+	
 	@OneToOne
 	public Document getCorrection() {
 		return correction;
@@ -82,10 +81,12 @@ public class Document implements Serializable{
 
 
 
-	public Document(Long idDoc, String nom, byte[] fichier,
-			Document correction, Date datedoc) {
+	public Document(Long idDoc, String type, String description, String nom,
+			Blob fichier, Document correction, Date datedoc) {
 		super();
 		this.idDoc = idDoc;
+		this.type = type;
+		this.description = description;
 		this.nom = nom;
 		this.fichier = fichier;
 		this.correction = correction;
@@ -94,9 +95,33 @@ public class Document implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Document [idDoc=" + idDoc + ", nom=" + nom + ", fichier="
-				+ Arrays.toString(fichier) + ", correction=" + correction
-				+ ", datedoc=" + datedoc + "]";
+		return "Document [idDoc=" + idDoc + ", type=" + type + ", description="
+				+ description + ", nom=" + nom + ", fichier=" + fichier
+				+ ", correction=" + correction + ", datedoc=" + datedoc + "]";
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Blob getFichier() {
+		return fichier;
+	}
+
+	public void setFichier(Blob fichier) {
+		this.fichier = fichier;
 	}
 
 	public Document() {
