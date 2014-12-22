@@ -18,6 +18,7 @@ import com.PL.Spring.Entities.Admin;
 import com.PL.Spring.Entities.Document;
 import com.PL.Spring.Entities.Module;
 import com.PL.Spring.Entities.Phase;
+import com.PL.Spring.Entities.Professor;
 import com.PL.Spring.Entities.Role;
 import com.PL.Spring.Entities.User;
 
@@ -37,7 +38,30 @@ public class testUser {
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 	}
+	
+	
+	/*@Test
+	public void testAddprof() {
+		Professor p=new Professor();
+		p.setActived(true);
+		p.setEmail("a@gmail.com");
+		p.setNom("JDIDI");
+		p.setPassword("pass");
+		p.setPrenom("Nedal");
+		p.setUser_name("hila");
+		
+		metier.addProfessor(p);
+		
+	}*/
 
+	
+	@Test
+	public void testGetProfessors() {
+		System.out.println("profs  :"+metier.getAllProfessors());
+		
+	}
+	
+	
 	@Test
 	public void testAddUser() {
 		

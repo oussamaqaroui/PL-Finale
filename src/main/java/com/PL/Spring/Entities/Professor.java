@@ -20,7 +20,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Entity
 @Table(name="Professors")
 @PrimaryKeyJoinColumn(name="user_id")
-public class Professor extends User implements Serializable {
+public class Professor extends User implements Serializable,Comparable<Professor> {
 	
 
 	private static final long serialVersionUID = -3939879473294951527L;
@@ -45,7 +45,7 @@ public class Professor extends User implements Serializable {
 	
 	/*@OneToOne(mappedBy="HeadOfDep",cascade = CascadeType.ALL)
 	private Departement HDep;//Departement pour lequel il est chef
-*/	
+*/	//fetch = FetchType.EAGER,
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name="user_id")
 	private Collection<Module> Modules;
@@ -275,6 +275,17 @@ public class Professor extends User implements Serializable {
 	public Professor() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+
+
+
+
+
+
+	@Override
+	public int compareTo(Professor o) {
+		return this.getUser_id().compareTo(o.getUser_id());
 	}
 
 }

@@ -907,20 +907,20 @@
                                         <table class="table table-vcenter">
                                             <thead>
                                                 <tr class="active">
-                                                    <th>TDs</th>
+                                                    <th>Documents</th>
                                                     <th class="text-right"><small><em></em></small></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                <c:forEach items="${documents}" var="d">
                                                 <tr>
-                                                    <td><a href="page_ready_elearning_course_lesson.html">${d.getNom()}</a></td>
+                                                    <td><a href="download?documentId=${d.getIdDoc()}">${d.getNom()}</a></td>
                                                     <td>${d.getDescription()}</td>
                                                     <td class="text-right">
                                                     
                                                      <div class="btn-group btn-group-xs">
-                                                         <a href="delet?docId=${d.getIdDoc()}" data-toggle="tooltip" title="Delete" class="btn btn-danger"><i class="fa fa-times"></i></a>
-                                                         <a href="download?documentId=${d.getIdDoc()}" onclick="return confirm('Vous voulez suprrimer ce document ?')" class="btn btn-default" data-toggle="tooltip" title="Download"><i class="fa fa-cloud-download"></i></a>
+                                                         <a href="delet?docId=${d.getIdDoc()}"   onclick="return confirm('Vous voulez suprrimer ce document ?')" data-toggle="tooltip" title="Delete" class="btn btn-danger"><i class="fa fa-times"></i></a>
+                                                         <a href="download?documentId=${d.getIdDoc()}" class="btn btn-default" data-toggle="tooltip" title="Download"><i class="fa fa-cloud-download"></i></a>
                                               
                                                     
                                                     </div>

@@ -60,6 +60,7 @@
 
 	<s:http auto-config="true" use-expressions="true"  >
         <s:intercept-url pattern="/login" access="permitAll" />
+        <s:intercept-url pattern="/test" access="permitAll" />
         <s:intercept-url pattern="/adminUsers/*" access="hasRole('ROLE_ADMIN_PR')"/>
         <s:intercept-url pattern="/studentUsers/*" access="hasAnyRole('ROLE_ADMIN_PR','ROLE_ADMIN')"/>
         <s:intercept-url pattern="/professorUsers/*" access="hasAnyRole('ROLE_ADMIN_PR','ROLE_ADMIN')"/>
