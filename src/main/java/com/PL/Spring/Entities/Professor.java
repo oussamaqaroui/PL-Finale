@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -20,7 +21,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Entity
 @Table(name="Professors")
 @PrimaryKeyJoinColumn(name="user_id")
-public class Professor extends User implements Serializable,Comparable<Professor> {
+public class Professor extends User implements Serializable {
 	
 
 	private static final long serialVersionUID = -3939879473294951527L;
@@ -46,36 +47,81 @@ public class Professor extends User implements Serializable,Comparable<Professor
 	/*@OneToOne(mappedBy="HeadOfDep",cascade = CascadeType.ALL)
 	private Departement HDep;//Departement pour lequel il est chef
 */	//fetch = FetchType.EAGER,
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="user_id")
-	private Collection<Module> Modules;
+	@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@JoinColumn(name="professor")
+	private Set<Module> modules;
 
-	
-	
-	
-	
-
-
-	public Professor(String nom, String prenom, String email, byte[] photo,
-			Date dateNaissance, String adresse, Date dateCreation,
-			Date dateModification, Collection<Module> modules) {
-		super();
-		this.nom = nom;
-		this.prenom = prenom;
-		this.email = email;
-		this.photo = photo;
-		this.dateNaissance = dateNaissance;
-		this.adresse = adresse;
-		this.dateCreation = dateCreation;
-		this.dateModification = dateModification;
-		Modules = modules;
+	public String getNom() {
+		return nom;
 	}
 
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
 
+	public String getPrenom() {
+		return prenom;
+	}
 
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
 
+	public String getEmail() {
+		return email;
+	}
 
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
+	public byte[] getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(byte[] photo) {
+		this.photo = photo;
+	}
+
+	public Date getDateNaissance() {
+		return dateNaissance;
+	}
+
+	public void setDateNaissance(Date dateNaissance) {
+		this.dateNaissance = dateNaissance;
+	}
+
+	public String getAdresse() {
+		return adresse;
+	}
+
+	public void setAdresse(String adresse) {
+		this.adresse = adresse;
+	}
+
+	public Date getDateCreation() {
+		return dateCreation;
+	}
+
+	public void setDateCreation(Date dateCreation) {
+		this.dateCreation = dateCreation;
+	}
+
+	public Date getDateModification() {
+		return dateModification;
+	}
+
+	public void setDateModification(Date dateModification) {
+		this.dateModification = dateModification;
+	}
+
+	public Set<Module> getModules() {
+		return modules;
+	}
+
+	public void setModules(Set<Module> modules) {
+		this.modules = modules;
+	}
 
 	@Override
 	public String toString() {
@@ -83,209 +129,35 @@ public class Professor extends User implements Serializable,Comparable<Professor
 				+ email + ", photo=" + Arrays.toString(photo)
 				+ ", dateNaissance=" + dateNaissance + ", adresse=" + adresse
 				+ ", dateCreation=" + dateCreation + ", dateModification="
-				+ dateModification + ", Modules=" + Modules + "]";
+				+ dateModification + ", modules=" + modules + "]";
 	}
 
-
-
-
-
-
-
-	public String getNom() {
-		return nom;
-	}
-
-
-
-
-
-
-
-	public void setNom(String nom) {
+	public Professor(String nom, String prenom, String email, byte[] photo,
+			Date dateNaissance, String adresse, Date dateCreation,
+			Date dateModification, Set<Module> modules) {
+		super();
 		this.nom = nom;
-	}
-
-
-
-
-
-
-
-	public String getPrenom() {
-		return prenom;
-	}
-
-
-
-
-
-
-
-	public void setPrenom(String prenom) {
 		this.prenom = prenom;
-	}
-
-
-
-
-
-
-
-	public String getEmail() {
-		return email;
-	}
-
-
-
-
-
-
-
-	public void setEmail(String email) {
 		this.email = email;
-	}
-
-
-
-
-
-
-
-	public byte[] getPhoto() {
-		return photo;
-	}
-
-
-
-
-
-
-
-	public void setPhoto(byte[] photo) {
 		this.photo = photo;
-	}
-
-
-
-
-
-
-
-	public Date getDateNaissance() {
-		return dateNaissance;
-	}
-
-
-
-
-
-
-
-	public void setDateNaissance(Date dateNaissance) {
 		this.dateNaissance = dateNaissance;
-	}
-
-
-
-
-
-
-
-	public String getAdresse() {
-		return adresse;
-	}
-
-
-
-
-
-
-
-	public void setAdresse(String adresse) {
 		this.adresse = adresse;
-	}
-
-
-
-
-
-
-
-	public Date getDateCreation() {
-		return dateCreation;
-	}
-
-
-
-
-
-
-
-	public void setDateCreation(Date dateCreation) {
 		this.dateCreation = dateCreation;
-	}
-
-
-
-
-
-
-
-	public Date getDateModification() {
-		return dateModification;
-	}
-
-
-
-
-
-
-
-	public void setDateModification(Date dateModification) {
 		this.dateModification = dateModification;
+		this.modules = modules;
 	}
-
-
-
-
-
-
-
-	public Collection<Module> getModules() {
-		return Modules;
-	}
-
-
-
-
-
-
-
-	public void setModules(Collection<Module> modules) {
-		Modules = modules;
-	}
-
-
-
-
-
-
 
 	public Professor() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-
-
-
-
-
-
-	@Override
-	public int compareTo(Professor o) {
-		return this.getUser_id().compareTo(o.getUser_id());
+	public Professor(String username, String password, boolean actived) {
+		super(username, password, actived);
+		// TODO Auto-generated constructor stub
 	}
 
+	
+	
+	
 }

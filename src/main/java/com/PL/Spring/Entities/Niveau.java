@@ -26,6 +26,11 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Table(name="Niveaux")
 public class Niveau implements java.io.Serializable,Comparable<Niveau>{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5012989335252959821L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="niveauID")
@@ -48,16 +53,6 @@ public class Niveau implements java.io.Serializable,Comparable<Niveau>{
 	@JoinColumn(name="f_ID")
 	private Filiere filiere;
 	
-	
-	public Filiere getFiliere() {
-		return filiere;
-	}
-
-
-	public void setFiliere(Filiere filiere) {
-		this.filiere = filiere;
-	}
-
 
 	@NotEmpty
 	private String nomNiveau;
@@ -77,51 +72,47 @@ public class Niveau implements java.io.Serializable,Comparable<Niveau>{
 
 	
 	
-	public Collection<Student> getStudents() {
-		return students;
+	
+	
+	
+
+
+	@Override
+	public int compareTo(Niveau o) {
+		return this.niveauID.compareTo(o.niveauID);
 	}
 
+	public Long getNiveauID() {
+		return niveauID;
+	}
+
+	public void setNiveauID(Long niveauID) {
+		this.niveauID = niveauID;
+	}
+
+	public Set<Student> getStudents() {
+		return students;
+	}
 
 	public void setStudents(Set<Student> students) {
 		this.students = students;
 	}
 
-
 	public Set<Phase> getPhases() {
 		return Phases;
 	}
-
 
 	public void setPhases(Set<Phase> phases) {
 		Phases = phases;
 	}
 
-/*
-	public boolean isActive() {
-		return active;
+	public Filiere getFiliere() {
+		return filiere;
 	}
 
-
-	public void setActive(boolean active) {
-		this.active = active;
+	public void setFiliere(Filiere filiere) {
+		this.filiere = filiere;
 	}
-*/
-
-	public Niveau() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	
-	public Long getNiveauID() {
-		return niveauID;
-	}
-
-	public void setNiveauID(Long nniveauID) {
-		niveauID = nniveauID;
-	}
-
-	
 
 	public String getNomNiveau() {
 		return nomNiveau;
@@ -135,8 +126,8 @@ public class Niveau implements java.io.Serializable,Comparable<Niveau>{
 		return descriptionNiveau;
 	}
 
-	public void setDescriptionNiveau(String ddescriptionNiveau) {
-		descriptionNiveau = ddescriptionNiveau;
+	public void setDescriptionNiveau(String descriptionNiveau) {
+		this.descriptionNiveau = descriptionNiveau;
 	}
 
 	public Date getDateDebut() {
@@ -155,48 +146,32 @@ public class Niveau implements java.io.Serializable,Comparable<Niveau>{
 		this.dateFin = dateFin;
 	}
 
-	/*
-	public String getAnnescolaire() {
-		return annescolaire;
-	}
-
-	public void setAnnescolaire(String annescolaire) {
-		this.annescolaire = annescolaire;
-	}
-
-	*/
 	@Override
 	public String toString() {
-		return "Niveau [NiveauID=" + niveauID + ", students=" + students
-				+ ", Phases=" + Phases + ", nomNiveau=" + nomNiveau
-				+ ", DescriptionNiveau=" + descriptionNiveau + ", dateDebut="
-				+ dateDebut + ", dateFin=" + dateFin + "]";
-				//+ ", annescolaire="+ annescolaire 
-				
+		return "Niveau [niveauID=" + niveauID + ", students=" + students
+				+ ", Phases=" + Phases + ", filiere=" + filiere
+				+ ", nomNiveau=" + nomNiveau + ", descriptionNiveau="
+				+ descriptionNiveau + ", dateDebut=" + dateDebut + ", dateFin="
+				+ dateFin + "]";
 	}
 
-
-	public Niveau(Long nniveauID, Set<Student> students,
-			Set<Phase> phases, String nomNiveau,
-			String ddescriptionNiveau, Date dateDebut, Date dateFin
-			//,String annescolaire
-			) 
-	{
+	public Niveau() {
 		super();
-		niveauID = nniveauID;
+		// TODO Auto-generated constructor stub
+	}
+
+	public Niveau(Long niveauID, Set<Student> students, Set<Phase> phases,
+			Filiere filiere, String nomNiveau, String descriptionNiveau,
+			Date dateDebut, Date dateFin) {
+		super();
+		this.niveauID = niveauID;
 		this.students = students;
 		Phases = phases;
+		this.filiere = filiere;
 		this.nomNiveau = nomNiveau;
-		descriptionNiveau = ddescriptionNiveau;
+		this.descriptionNiveau = descriptionNiveau;
 		this.dateDebut = dateDebut;
 		this.dateFin = dateFin;
-		//this.annescolaire = annescolaire;
-	}
-
-
-	@Override
-	public int compareTo(Niveau o) {
-		return this.niveauID.compareTo(o.niveauID);
 	}
 	
 	
