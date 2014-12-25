@@ -17,9 +17,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.PL.Spring.Entities.Admin;
 import com.PL.Spring.Entities.Document;
 import com.PL.Spring.Entities.Module;
+import com.PL.Spring.Entities.Note;
 import com.PL.Spring.Entities.Phase;
 import com.PL.Spring.Entities.Professor;
 import com.PL.Spring.Entities.Role;
+import com.PL.Spring.Entities.Student;
 import com.PL.Spring.Entities.User;
 
 
@@ -61,6 +63,27 @@ public class testUser {
 		
 	}
 	
+	@Test
+	public void testAddNote() {
+		Student s=metier.findStudent(new Long(2));
+		Module m =metier.findModule(new Long(1));
+		System.out.println("Student : "+s+"  \nModule :"+m);
+		Note n=new Note();
+		n.setValeur(new Double(20));
+		n.setModule(m);
+		n.setStudent(s);
+	    s.getNotes().add(n);
+	    metier.editStudent(s);
+		//System.out.println("profs  :"+metier.getAllProfessors());
+		
+	}
+	
+	
+	@Test
+	public void testGetUsers() {
+		System.out.println("users  :"+metier.getAllUsers());
+		
+	}
 	
 	@Test
 	public void testAddUser() {

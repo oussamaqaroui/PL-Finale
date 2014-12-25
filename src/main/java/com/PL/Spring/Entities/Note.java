@@ -1,5 +1,6 @@
 package com.PL.Spring.Entities;
 
+import java.beans.Transient;
 import java.io.Serializable;
 
 import javax.persistence.AssociationOverride;
@@ -95,7 +96,27 @@ public class Note implements Serializable{
 		// TODO Auto-generated constructor stub
 	} 
 
+	@Transient
+	public Student getStudent()
+	{
+		return this.pk.getStudent();
+	}
 	
+	public void setStudent(Student s)
+	{
+		this.pk.setStudent(s);
+	}
+	
+	@Transient
+	public Module getModule()
+	{
+		return this.pk.getModule();
+	}
+	
+	public void setModule(Module m)
+	{
+		this.pk.setModule(m);
+	}
 	
 	
 	

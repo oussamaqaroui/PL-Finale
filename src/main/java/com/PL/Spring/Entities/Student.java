@@ -52,7 +52,7 @@ public class Student extends User implements Serializable {
 	    {CascadeType.PERSIST, CascadeType.MERGE})
 	    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, 
 	    })
-	private Set<Note> absences=new HashSet<Note>(0);
+	private Set<Note> notes=new HashSet<Note>(0);
 	
 	
 	
@@ -161,14 +161,18 @@ public class Student extends User implements Serializable {
 
 
 
-	public Set<Note> getAbsences() {
-		return absences;
+
+
+
+
+	public Set<Note> getNotes() {
+		return notes;
 	}
 
 
 
-	public void setAbsences(Set<Note> absences) {
-		this.absences = absences;
+	public void setNotes(Set<Note> notes) {
+		this.notes = notes;
 	}
 
 
@@ -223,10 +227,10 @@ public class Student extends User implements Serializable {
 				return false;
 		} else if (!Niveaux.equals(other.Niveaux))
 			return false;
-		if (absences == null) {
-			if (other.absences != null)
+		if (notes == null) {
+			if (other.notes != null)
 				return false;
-		} else if (!absences.equals(other.absences))
+		} else if (!notes.equals(other.notes))
 			return false;
 		if (adresse == null) {
 			if (other.adresse != null)
@@ -276,7 +280,7 @@ public class Student extends User implements Serializable {
 				+ email + ", photo=" + Arrays.toString(photo)
 				+ ", dateNaissance=" + dateNaissance + ", adresse=" + adresse
 				+ ", dateCreation=" + dateCreation + ", dateModification="
-				+ dateModification + ", absences=" + absences + ", Niveaux="
+				+ dateModification + ", absences=" + notes + ", Niveaux="
 				+ Niveaux + "]";
 	}
 
@@ -284,7 +288,7 @@ public class Student extends User implements Serializable {
 
 	public Student(String nom, String prenom, String email, byte[] photo,
 			Date dateNaissance, String adresse, Date dateCreation,
-			Date dateModification, Set<Note> absences, Set<Niveau> niveaux) {
+			Date dateModification, Set<Note> notes, Set<Niveau> niveaux) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
@@ -294,7 +298,7 @@ public class Student extends User implements Serializable {
 		this.adresse = adresse;
 		this.dateCreation = dateCreation;
 		this.dateModification = dateModification;
-		this.absences = absences;
+		this.notes = notes;
 		Niveaux = niveaux;
 	}
 

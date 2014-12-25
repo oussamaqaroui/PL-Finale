@@ -245,7 +245,7 @@ public class Module implements java.io.Serializable{
 	@Override
 	public String toString() {
 		return "Module [ModuleID=" + ModuleID + ", phase=" + phase
-				+ ", professor=" + professor + ", docs=" + docs + ", absences="
+				+  ", docs=" + docs + ", absences="
 				+ absences + ", nomModule=" + nomModule
 				+ ", DescriptionModule=" + DescriptionModule
 				+ ", NombreHeures=" + NombreHeures + "]";
