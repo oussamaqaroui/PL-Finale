@@ -1040,8 +1040,35 @@
 			                                        	
 			                                        		<c:forEach items="${tnotes.getNotes()}" var="nots" varStatus="j">
 			                                        		
-			                                        			<c:if test="${j.count == i+1}">
-															        		<td><a href="javascript:void(0)" class="label label-warning">${nots.getValeur()}</a></td>
+			                                        			<c:if test="${studs.get(i).getUser_id() == nots.getStudent().getUser_id()}">
+															        	<td>
+															        			<c:choose>
+															        			<c:when test="${nots.getValeur() > 0 && nots.getValeur() < 10}">
+															        		
+															        		
+															        		
+															        					<a href="javascript:void(0)" class="label label-warning">${nots.getValeur()}</a>
+															        			</c:when>
+															        			
+															        			
+															        			
+															        			<c:when test="${nots.getValeur() >= 10  && nots.getValeur() < 12}">
+															        		
+															        		
+															        					<a href="javascript:void(0)" class="label label-info">${nots.getValeur()}</a>
+															        			</c:when>
+															        			
+															        			<c:when test="${nots.getValeur() >= 12  && nots.getValeur() < 21}">
+															        		
+															        		
+															        					<a href="javascript:void(0)" class="label label-success">${nots.getValeur()}</a>
+															        			</c:when>
+															        			
+															        			<c:otherwise>
+																			        <a href="javascript:void(0)" class="label label-success">error</a>
+																			    </c:otherwise>
+															        			</c:choose>
+															        	</td>
 															    </c:if>
 			                                        
 			                                        	 		
