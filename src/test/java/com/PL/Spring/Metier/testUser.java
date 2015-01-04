@@ -18,10 +18,12 @@ import com.PL.Spring.Entities.Admin;
 import com.PL.Spring.Entities.Document;
 import com.PL.Spring.Entities.Module;
 import com.PL.Spring.Entities.Note;
+import com.PL.Spring.Entities.NoteID;
 import com.PL.Spring.Entities.Phase;
 import com.PL.Spring.Entities.Professor;
 import com.PL.Spring.Entities.Role;
 import com.PL.Spring.Entities.Student;
+import com.PL.Spring.Entities.TypeNote;
 import com.PL.Spring.Entities.User;
 
 
@@ -58,30 +60,89 @@ public class testUser {
 
 	
 	@Test
-	public void testGetProfessors() {
-		System.out.println("profs  :"+metier.getAllProfessors());
+	public void testeditTN() {
+		 /*TypeNote tn=new TypeNote();
+		 tn.setNomType("TD");
+		 tn.setPourcentage(new Long(12));
+		 metier.addTypeNote(tn);*/
+		
+		TypeNote tn=metier.findTypeNote(new Long(3));
+		System.out.println("type  : "+tn);
+		
+		tn.setPourcentage(new Long(55));
+		metier.editTypeNote(tn);
 		
 	}
 	
 	@Test
 	public void testAddNote() {
-		Student s=metier.findStudent(new Long(2));
-		Module m =metier.findModule(new Long(1));
-		System.out.println("Student : "+s+"  \nModule :"+m);
+		Student s=metier.findStudent(new Long(4));
+		Module m =metier.findModule(new Long(2));
+		TypeNote tn=metier.findTypeNote(new Long(3));
+		System.out.println("\n\n\nStudent : "+s+"  \nModule :"+m+"\nTypeNote  :"+tn);
+		
+		
 		Note n=new Note();
-		n.setValeur(new Double(20));
+		
+	
+		
+		n.setValeur(new Double(19));
 		n.setModule(m);
 		n.setStudent(s);
+		n.setType(tn);
+		
+		
+		 //metier.addNote(n);
 	    s.getNotes().add(n);
+	    m.getNotes().add(n);
+	    tn.getNotes().add(n);
+	   
+	    metier.editModule(m);
 	    metier.editStudent(s);
+	    metier.editTypeNote(tn);
+	    
+	    
+	    
+	   // TypeNote tn=new TypeNote();
+	    
+	    
+	    
+	    
+	    /*----------------------------------------------------------------*/
+	   // TypeNote tn=metier.findTypeNote(new Long(4));
+	    
+	    
+	    
+	    //tn.setNomType("TP2");
+	    //tn.setPourcentage(new Long(25));
+	    
+	   // metier.addTypeNote(tn);
+
+System.out.println("--------------- Typenote ajouté-----------------");
+	    
+	    
+	   // tn.getNotes().add(n);
+	    //n.setType(tn);
+	    
+	   // metier.editTypeNote(tn);
+	    
+	    
+	    //n.setType(tn);
+	     
+	   // metier.editNote(n);
+	   
+	   
+	    
+	    
 		//System.out.println("profs  :"+metier.getAllProfessors());
 		
 	}
 	
 	
 	@Test
-	public void testGetUsers() {
-		System.out.println("users  :"+metier.getAllUsers());
+	public void testGetUsersProf() {
+		Professor pr=metier.findProfessorByName("CHANTIT");
+		System.out.println("users Professor :"+pr);
 		
 	}
 	

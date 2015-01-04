@@ -76,7 +76,7 @@ public class Module implements java.io.Serializable{
 	    {CascadeType.PERSIST, CascadeType.MERGE})
 	    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, 
 	    })
-	private Set<Note> absences=new HashSet<Note>(0);
+	private Set<Note> notes=new HashSet<Note>(0);
 	
 	
 	@NotEmpty
@@ -129,14 +129,6 @@ public class Module implements java.io.Serializable{
 	}
 
 
-	public Set<Note> getAbsences() {
-		return absences;
-	}
-
-
-	public void setAbsences(Set<Note> absences) {
-		this.absences = absences;
-	}
 
 
 	public String getNomModule() {
@@ -192,6 +184,16 @@ public class Module implements java.io.Serializable{
 	}
 */
 
+	public Set<Note> getNotes() {
+		return notes;
+	}
+
+
+	public void setNotes(Set<Note> notes) {
+		this.notes = notes;
+	}
+
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -213,10 +215,10 @@ public class Module implements java.io.Serializable{
 			return false;
 		if (NombreHeures != other.NombreHeures)
 			return false;
-		if (absences == null) {
-			if (other.absences != null)
+		if (notes == null) {
+			if (other.notes != null)
 				return false;
-		} else if (!absences.equals(other.absences))
+		} else if (!notes.equals(other.notes))
 			return false;
 		if (docs == null) {
 			if (other.docs != null)
@@ -245,22 +247,25 @@ public class Module implements java.io.Serializable{
 	@Override
 	public String toString() {
 		return "Module [ModuleID=" + ModuleID + ", phase=" + phase
-				+  ", docs=" + docs + ", absences="
-				+ absences + ", nomModule=" + nomModule
+				+  ", docs=" + docs + ", notes="
+				+ notes + ", nomModule=" + nomModule
 				+ ", DescriptionModule=" + DescriptionModule
 				+ ", NombreHeures=" + NombreHeures + "]";
 	}
 
 
+
+
+
 	public Module(Long moduleID, Phase phase, Professor professor,
-			Set<Document> docs, Set<Note> absences, String nomModule,
+			Set<Document> docs, Set<Note> notes, String nomModule,
 			String descriptionModule, int nombreHeures) {
 		super();
 		ModuleID = moduleID;
 		this.phase = phase;
 		this.professor = professor;
 		this.docs = docs;
-		this.absences = absences;
+		this.notes = notes;
 		this.nomModule = nomModule;
 		DescriptionModule = descriptionModule;
 		NombreHeures = nombreHeures;

@@ -12,9 +12,11 @@ import com.PL.Spring.Entities.Document;
 import com.PL.Spring.Entities.Filiere;
 import com.PL.Spring.Entities.Module;
 import com.PL.Spring.Entities.Niveau;
+import com.PL.Spring.Entities.Note;
 import com.PL.Spring.Entities.Phase;
 import com.PL.Spring.Entities.Professor;
 import com.PL.Spring.Entities.Student;
+import com.PL.Spring.Entities.TypeNote;
 import com.PL.Spring.Entities.User;
 
 @Transactional
@@ -412,5 +414,65 @@ public class UserServiceImp implements UserServiceInt{
 	@Override
 	public List<Filiere> getAllFilieres() {
 		return userDaoImp.getAllFilieres();
+	}
+
+	@Override
+	public void addTypeNote(TypeNote type) {
+		userDaoImp.addTypeNote(type);
+		
+	}
+
+	@Override
+	public void editTypeNote(TypeNote type) {
+		userDaoImp.editTypeNote(type);
+		
+	}
+
+	@Override
+	public void deleteTypeNote(Long typeId) {
+		userDaoImp.deleteTypeNote(typeId);
+		
+	}
+
+	@Override
+	public TypeNote findTypeNote(Long typeId) {
+		
+		return userDaoImp.findTypeNote(typeId);
+	}
+
+	@Override
+	public List<TypeNote> getAllTypeNote() {
+		
+		return userDaoImp.getAllTypeNote();
+	}
+
+	@Override
+	public void addNote(Note note) {
+		userDaoImp.addNote(note);
+		
+	}
+
+	@Override
+	public void editNote(Note note) {
+		userDaoImp.editNote(note);
+		
+	}
+
+	@Override
+	public void deleteLNote(Long noteID) {
+		userDaoImp.deleteLNote(noteID);
+		
+	}
+
+	@Override
+	public Note findNote(Long noteID) {
+		
+		return userDaoImp.findNote(noteID);
+	}
+
+	@Override
+	public List<TypeNote> getTypeNoteByModule(Module m) {
+		
+		return userDaoImp.getTypeNoteByModule(m);
 	}
 }

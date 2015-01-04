@@ -146,6 +146,13 @@ public class Niveau implements java.io.Serializable,Comparable<Niveau>{
 		this.dateFin = dateFin;
 	}
 
+
+	
+	
+	
+	
+
+
 	@Override
 	public String toString() {
 		return "Niveau [niveauID=" + niveauID + ", students=" + students

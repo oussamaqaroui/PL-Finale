@@ -7,7 +7,9 @@ import javax.persistence.AssociationOverride;
 import javax.persistence.AssociationOverrides;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
@@ -19,7 +21,9 @@ import javax.persistence.Table;
 	@AssociationOverride(name = "pk.student", 
 		joinColumns = @JoinColumn(name = "user_id")),
 	@AssociationOverride(name = "pk.module", 
-		joinColumns = @JoinColumn(name = "moduleID")) })
+		joinColumns = @JoinColumn(name = "moduleID")),
+	@AssociationOverride(name = "pk.type", 
+		joinColumns = @JoinColumn(name = "TypeID"))})
 public class Note implements Serializable{
 
 	/**
@@ -32,6 +36,14 @@ public class Note implements Serializable{
 	private NoteID pk =new NoteID();
 	
 	Double valeur;
+
+	
+	
+	
+
+	
+	
+
 
 	public NoteID getPk() {
 		return pk;
@@ -48,6 +60,13 @@ public class Note implements Serializable{
 	public void setValeur(Double valeur) {
 		this.valeur = valeur;
 	}
+
+
+	
+	
+	
+
+	
 
 	@Override
 	public int hashCode() {
@@ -80,10 +99,7 @@ public class Note implements Serializable{
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		return "Note [pk=" + pk + ", valeur=" + valeur + "]";
-	}
+
 
 	public Note(NoteID pk, Double valeur) {
 		super();
@@ -95,6 +111,16 @@ public class Note implements Serializable{
 		super();
 		// TODO Auto-generated constructor stub
 	} 
+
+
+
+
+	
+
+	@Override
+	public String toString() {
+		return "Note [pk=" + pk + ", valeur=" + valeur + "]";
+	}
 
 	@Transient
 	public Student getStudent()
@@ -117,6 +143,20 @@ public class Note implements Serializable{
 	{
 		this.pk.setModule(m);
 	}
+	
+	@Transient
+	public TypeNote getType()
+	{
+		return this.pk.getType();
+	}
+	
+	public void setType(TypeNote tn)
+	{
+		this.pk.setType(tn);
+	}
+
+
+	
 	
 	
 	

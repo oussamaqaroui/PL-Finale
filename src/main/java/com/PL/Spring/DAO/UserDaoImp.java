@@ -2,6 +2,8 @@ package com.PL.Spring.DAO;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -11,24 +13,25 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import com.PL.Spring.Comparator.CustomComparator;
 import com.PL.Spring.Entities.Admin;
 import com.PL.Spring.Entities.Departement;
 import com.PL.Spring.Entities.Document;
-
 import com.PL.Spring.Entities.Filiere;
-
 import com.PL.Spring.Entities.Module;
 import com.PL.Spring.Entities.Niveau;
+import com.PL.Spring.Entities.Note;
 import com.PL.Spring.Entities.Phase;
 import com.PL.Spring.Entities.Professor;
 import com.PL.Spring.Entities.Student;
+import com.PL.Spring.Entities.TypeNote;
 import com.PL.Spring.Entities.User;
 
 
 
 
 public class UserDaoImp implements UserDaoInt,AdminDaoInt,StudentDaoInt,ProfessorDaoInt,DepartementDaoInt
-,PhaseDaoInt,NiveauDaoInt,FiliereDaoInt,ModuleDaoInt,DocumentDaoInt
+,PhaseDaoInt,NiveauDaoInt,FiliereDaoInt,ModuleDaoInt,DocumentDaoInt,TypeNoteDaoInt,NoteDaoInt
 
 {
 
@@ -213,7 +216,7 @@ public class UserDaoImp implements UserDaoInt,AdminDaoInt,StudentDaoInt,Professo
 
 	@Override
 	public Professor findProfessorByName(String username) {
-		Query query=this.em.createQuery("SELECT o from Professor o where o.nom =:username");
+		Query query=this.em.createQuery("SELECT o from Professor o where o.user_name =:username");
 		query.setParameter("username", username);
 		return (Professor)query.getSingleResult();
 	}
@@ -592,6 +595,91 @@ String req=new String("select o from Departement o where ");
 		return  query.getResultList();
 	
 	}
+
+	@Override
+	public void addTypeNote(TypeNote type) {
+		em.persist(type);
+		
+	}
+
+	@Override
+	public void editTypeNote(TypeNote type) {
+		em.merge(type);
+		
+	}
+
+	@Override
+	public void deleteTypeNote(Long typeId) {
+		TypeNote f=em.getReference(TypeNote.class,typeId );
+		em.remove(f);
+		
+	}
+
+	@Override
+	public TypeNote findTypeNote(Long typeId) {
+		return em.find(TypeNote.class, typeId);
+	}
+
+	@Override
+	public List<TypeNote> getAllTypeNote() {
+		Query query=this.em.createQuery("SELECT o from TypeNote o");
+		return query.getResultList();
+	}
+
+	@Override
+	public void addNote(Note note) {
+		em.persist(note);
+		
+	}
+
+	@Override
+	public void editNote(Note note) {
+		em.merge(note);
+		
+	}
+
+	@Override
+	public void deleteLNote(Long noteID) {
+		Note n=em.getReference(Note.class,noteID );
+		em.remove(n);
+		
+	}
+
+	@Override
+	public Note findNote(Long noteID) {
+		return em.find(Note.class, noteID);
+	}
+
+	@Override
+	public List<TypeNote> getTypeNoteByModule(Module m) {
+
+
+		Query query=this.em.createQuery("SELECT o from TypeNote o");
+		List<TypeNote> tns= query.getResultList();
+		
+		List<TypeNote> tmp=new ArrayList<TypeNote>();
+		
+		Note n;
+		Iterator<Note>in;
+		List<Note> listnotes;
+		for(int i=0;i<tns.size();i++)
+		{
+			in=tns.get(i).getNotes().iterator();
+			if (in.next().getModule().getModuleID()==m.getModuleID())
+			{
+				listnotes=new ArrayList<Note>(tns.get(i).getNotes());
+				Collections.sort(listnotes,new CustomComparator());
+				tns.get(i).setNotes(new HashSet<Note>(listnotes));
+				tmp.add(tns.get(i));
+				
+			}
+			
+		}
+		
+		
+		return tmp;
+	}
+
 
 
 

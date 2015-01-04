@@ -9,12 +9,27 @@ import com.PL.Spring.Entities.Document;
 import com.PL.Spring.Entities.Filiere;
 import com.PL.Spring.Entities.Module;
 import com.PL.Spring.Entities.Niveau;
+import com.PL.Spring.Entities.Note;
 import com.PL.Spring.Entities.Phase;
 import com.PL.Spring.Entities.Professor;
 import com.PL.Spring.Entities.Student;
+import com.PL.Spring.Entities.TypeNote;
 import com.PL.Spring.Entities.User;
 
 public interface UserServiceInt {
+	
+	void addNote(Note note);
+	void editNote(Note note);
+	void deleteLNote(Long noteID);
+	Note  findNote(Long noteID);
+	
+	
+	void addTypeNote(TypeNote type);
+	void editTypeNote(TypeNote type);
+	void deleteTypeNote(Long typeId);
+	TypeNote findTypeNote(Long typeId);
+	List<TypeNote> getAllTypeNote();
+	List<TypeNote> getTypeNoteByModule(Module m);
 	
 	void addUser(User user);
 	void editUser(User user);

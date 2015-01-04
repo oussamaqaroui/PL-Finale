@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.Embeddable;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 
@@ -15,6 +16,12 @@ public class NoteID implements  Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	//@JoinColumn(name="TypeID")
+	private TypeNote type;
 	
 	
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -45,9 +52,13 @@ public class NoteID implements  Serializable{
 	}
 
 
-	@Override
-	public String toString() {
-		return "NoteID [student=" + student + ", module=" + module + "]";
+	public TypeNote getType() {
+		return type;
+	}
+
+
+	public void setType(TypeNote type) {
+		this.type = type;
 	}
 
 
@@ -57,6 +68,7 @@ public class NoteID implements  Serializable{
 		int result = 1;
 		result = prime * result + ((module == null) ? 0 : module.hashCode());
 		result = prime * result + ((student == null) ? 0 : student.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
 
@@ -80,8 +92,28 @@ public class NoteID implements  Serializable{
 				return false;
 		} else if (!student.equals(other.student))
 			return false;
+		if (type == null) {
+			if (other.type != null)
+				return false;
+		} else if (!type.equals(other.type))
+			return false;
 		return true;
 	}
+
+
+	@Override
+	public String toString() {
+		return "NoteID [type=" + type.getNomType() + ", student=" + student.getNom() + ", module="
+				+ module.getNomModule() + "]";
+	}
+
+
+
+
+
+
+
+
 	
 	
 	

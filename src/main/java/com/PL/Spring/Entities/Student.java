@@ -274,14 +274,18 @@ public class Student extends User implements Serializable {
 
 
 
+
+
+
+
+
 	@Override
 	public String toString() {
 		return "Student [nom=" + nom + ", prenom=" + prenom + ", email="
 				+ email + ", photo=" + Arrays.toString(photo)
 				+ ", dateNaissance=" + dateNaissance + ", adresse=" + adresse
 				+ ", dateCreation=" + dateCreation + ", dateModification="
-				+ dateModification + ", absences=" + notes + ", Niveaux="
-				+ Niveaux + "]";
+				+ dateModification + ", Niveaux=" + Niveaux + "]";
 	}
 
 

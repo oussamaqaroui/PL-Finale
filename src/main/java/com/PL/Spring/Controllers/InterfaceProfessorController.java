@@ -59,10 +59,11 @@ public class InterfaceProfessorController {
 	
 	@RequestMapping(value="/modules")
 	public String modules(Model model,Principal p){
-		//Professor pr=metier.findProfessorByName(p.getName());
-		//modules=metier.getAllModulesByProfessor(pr.getUser_id());
 		
-		modules=metier.getAllModulesByProfessor(new Long(1));
+		Professor pr=metier.findProfessorByName(p.getName());
+		modules=metier.getAllModulesByProfessor(pr.getUser_id());
+		
+		//modules=metier.getAllModulesByProfessor(new Long(1));
 		//modules=metier.getAllModules();
 		model.addAttribute("module", new Module());
 		model.addAttribute("modules",modules);
