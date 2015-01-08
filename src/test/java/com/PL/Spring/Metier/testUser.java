@@ -2,11 +2,14 @@ package com.PL.Spring.Metier;
 
 import static org.junit.Assert.*;
 
-import java.awt.List;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import java.util.Vector;
+
+import javassist.bytecode.Descriptor.Iterator;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -58,6 +61,33 @@ public class testUser {
 		
 	}*/
 
+	
+	
+	@Test
+	public void getTNbymodule() {
+		
+		Module m=metier.findModule(new Long(1));
+		List<TypeNote> tns=new ArrayList<TypeNote>();
+				tns=metier.getTypeNoteByModule(m);
+		
+	 
+	  
+		List<TypeNote> tmp=metier.getAllTypeNote();
+
+		System.out.println("\n\n"+tns.size()+" type notes :"+tns);
+		System.out.println("\n"+tmp.size()+" type notes All :"+tmp);
+	
+	}
+	
+
+	@Test
+	public void deletTN() {
+	
+		
+		metier.deleteTypeNote(new Long(6));
+		
+		
+	}
 	
 	@Test
 	public void testeditTN() {

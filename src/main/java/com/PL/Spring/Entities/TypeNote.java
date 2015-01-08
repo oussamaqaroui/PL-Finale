@@ -33,7 +33,7 @@ public class TypeNote implements java.io.Serializable {
 	private Long TypeID;
 	
 	
-	@OneToMany(fetch= FetchType.EAGER , cascade=CascadeType.ALL)
+	@OneToMany(fetch= FetchType.EAGER , cascade= {CascadeType.ALL})
 	@JoinColumn(name="pk")
 	private Set<Note> notes=new HashSet<Note>(0);
 	

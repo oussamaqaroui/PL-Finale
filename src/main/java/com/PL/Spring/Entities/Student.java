@@ -49,7 +49,7 @@ public class Student extends User implements Serializable {
 	
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "pk.student",orphanRemoval=true, cascade = 
-	    {CascadeType.PERSIST, CascadeType.MERGE})
+	    {CascadeType.PERSIST,CascadeType.MERGE})
 	    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, 
 	    })
 	private Set<Note> notes=new HashSet<Note>(0);

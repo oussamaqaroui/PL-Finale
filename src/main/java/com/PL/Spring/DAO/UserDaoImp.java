@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Map.Entry;
 
 import javax.persistence.EntityManager;
@@ -610,8 +611,100 @@ String req=new String("select o from Departement o where ");
 
 	@Override
 	public void deleteTypeNote(Long typeId) {
-		TypeNote f=em.getReference(TypeNote.class,typeId );
-		em.remove(f);
+		TypeNote tn=em.getReference(TypeNote.class,typeId );
+		Module m;
+		Iterator<Note> it;
+		Note n;
+		Student s;
+		Set<Note> notes=tn.getNotes();
+		it=notes.iterator();
+		while(it.hasNext())
+		{
+			n=it.next();
+			tn.getNotes().remove(n);
+			n.getStudent().getNotes().remove(n);
+			n.getModule().getNotes().remove(n);
+			em.merge(n.getStudent());
+			em.merge(n.getModule());
+			em.merge(tn);
+			n.setType(null);
+			n.setModule(null);
+			n.setStudent(null);
+			em.remove(n);
+			
+		}
+		
+		/*Set<Note> notes=tn.getNotes();
+		List<Student>listetudiant=new ArrayList<Student>();
+		List<Module>listmodule=new ArrayList<Module>();
+		it=notes.iterator();
+		while(it.hasNext())
+		{
+			n=it.next();
+			m=it.next().getModule();
+			s=it.next().getStudent();
+			
+			//em.remove(n);
+			
+			m.getNotes().remove(n);
+			s.getNotes().remove(n);
+			tn.getNotes().remove(n);
+			
+			listetudiant.add(s);
+			listmodule.add(m);
+			this.editTypeNote(tn);
+			this.editModule(m);
+			this.editStudent(s);
+			//em.remove(n);
+		}*/
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		/*for(int i=0;i<listmodule.size();i++)
+		{
+			this.editModule(listmodule.get(i));
+			this.editStudent(listetudiant.get(i));
+			
+		}
+		*/
+		
+		em.remove(tn);
+/*	
+			Set<Note> notes;//=new HashSet<Note>(0);
+			notes=tn.getNotes();
+			it=notes.iterator();
+			tn.setNotes(null);
+			em.merge(tn);
+			while (it.hasNext())
+			{
+				n=it.next();
+				m=it.next().getModule();
+				s=it.next().getStudent();
+				m.getNotes().remove(n);
+				s.getNotes().remove(n);
+				
+				
+				//em.getTransaction().begin();
+				//tn.getNotes().remove(it.next());
+				em.merge(m);
+				em.merge(s);
+				//em.getTransaction().commit();
+				//this.editModule(m);
+				//this.editStudent(s);
+				//em.remove(n);
+				
+				
+				
+			}*/
+			
+		
+		
 		
 	}
 
@@ -639,7 +732,7 @@ String req=new String("select o from Departement o where ");
 	}
 
 	@Override
-	public void deleteLNote(Long noteID) {
+	public void deleteLNote(Long noteID) {		
 		Note n=em.getReference(Note.class,noteID );
 		em.remove(n);
 		
@@ -654,27 +747,63 @@ String req=new String("select o from Departement o where ");
 	public List<TypeNote> getTypeNoteByModule(Module m) {
 
 
-		Query query=this.em.createQuery("SELECT o from TypeNote o");
+		/*Query query=this.em.createQuery("SELECT o from TypeNote o");
 		List<TypeNote> tns= query.getResultList();
 		
 		List<TypeNote> tmp=new ArrayList<TypeNote>();
+		List<TypeNote> nottmp=new ArrayList<TypeNote>();
 		
 		Note n;
 		Iterator<Note>in;
 		List<Note> listnotes;
-		for(int i=0;i<tns.size();i++)
+		
+		//{
+			if(tns.get(0).getNotes().size()>0)
+			{
+				listnotes=new ArrayList<Note>(tns.get(0).getNotes());
+				
+				if (m.getModuleID().longValue()==listnotes.get(0).getModule().getModuleID().longValue())
+				{
+				
+					tmp.add(tns.get(i));
+				}
+				
+				
+			}
+		//}
+		for(int i=0;i<tns.size();i++)	
 		{
 			in=tns.get(i).getNotes().iterator();
 			if (in.next().getModule().getModuleID()==m.getModuleID())
 			{
-				listnotes=new ArrayList<Note>(tns.get(i).getNotes());
-				Collections.sort(listnotes,new CustomComparator());
-				tns.get(i).setNotes(new HashSet<Note>(listnotes));
+				//listnotes=new ArrayList<Note>(tns.get(i).getNotes());
+				//Collections.sort(listnotes,new CustomComparator());
+				//tns.get(i).setNotes(new HashSet<Note>(listnotes));
 				tmp.add(tns.get(i));
 				
 			}
 			
+		}*/
+		
+		List<TypeNote> tmp=new ArrayList<TypeNote>();
+		List<TypeNote> tn;
+		tn=this.getAllTypeNote();
+		Iterator<Note>notes;
+		Note n;
+		for(int i=0;i<tn.size();i++)
+		{
+			notes=tn.get(i).getNotes().iterator();
+			if(notes.hasNext())
+			{
+				n=notes.next();
+				if(n.getModule().getModuleID().longValue()==m.getModuleID().longValue())
+					tmp.add(tn.get(i));
+			}
 		}
+		
+		
+		
+		
 		
 		
 		return tmp;

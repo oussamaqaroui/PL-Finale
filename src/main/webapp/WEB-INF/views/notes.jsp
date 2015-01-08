@@ -895,7 +895,7 @@
                                            
                                             <i class="fa fa-clock-o"></i> ${module.getNombreHeures()} hours
                                         </a>
-                                        <a href="javascript:void(0)" class="btn btn-sm btn-success">Free with Subscription</a>
+                                       
                                         <hr>
                                         <!-- Lessons -->
                                      
@@ -985,6 +985,20 @@
                                 <a href="javascript:void(0)" class="btn btn-primary" id="style-condensed" data-toggle="tooltip" title=".table-condensed">Condensed</a>
                                 <a href="javascript:void(0)" class="btn btn-primary" id="style-hover" data-toggle="tooltip" title=".table-hover">Hover</a>
                             </div>
+                            
+                            
+                            
+                            
+                            
+                            <div class="block-options pull-right">
+                                <a href="#modal-large" class="btn btn-alt btn-success" data-toggle="modal" title="" data-original-title="Ajouter Notes"> <i class="fa fa-plus"></i> Ajouter Notes   <i class="fa fa-pencil"></i></a>
+                                
+                               
+                            </div>
+                            
+                            
+                            
+                            
                             <div class="btn-group btn-group-sm pull-left" data-toggle="buttons">
                                 <label id="style-default" class="btn btn-primary active" data-toggle="tooltip" title=".table">
                                     <input type="radio" name="style-options"> Default
@@ -1017,7 +1031,23 @@
                                         
                                          <c:forEach items="${type}" var="tn">
                                         
-                                        <th>${tn.getNomType()}</th>
+                                        <th>
+                                        <div class="widget-simple">
+                                        
+                                        ${tn.getNomType()}
+                                       
+                                        <small>
+                                        <div class="progress progress-striped">
+                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="${tn.getPourcentage()}" aria-valuemin="0" aria-valuemax="100" style="width: ${tn.getPourcentage()}%">${tn.getPourcentage()}%</div>
+										</div>
+										</small>
+                                        
+                                        <div class="widget-options-left">
+                                            <a href="#modal-regular2" class="btn btn-xs btn-primary" data-toggle="modal" title="Edit" onclick="return tnedit(${tn.getPourcentage()},'${tn.getNomType()}',${tn.getTypeID()})"><i class="fa fa-pencil"></i></a>
+                                            <a href="delet?typeId=${tn.getTypeID()}" class="btn btn-xs btn-primary" data-toggle="modal" title="remove"><i class="hi hi-remove"></i></a>
+                                        </div>
+                                        </div>
+                                        </th>
                                          </c:forEach>
                                     </tr>
                                 </thead>
@@ -1047,7 +1077,7 @@
 															        		
 															        		
 															        		
-															        					<a href="javascript:void(0)" class="label label-warning">${nots.getValeur()}</a>
+															        					<a href="#modal-small" id="noteed" class="label label-warning" data-toggle="modal" onclick="return crunchifyAjax(${nots.getValeur()},${studs.get(i).getUser_id()},${tnotes.getTypeID()})">${nots.getValeur()}</a>
 															        			</c:when>
 															        			
 															        			
@@ -1055,17 +1085,19 @@
 															        			<c:when test="${nots.getValeur() >= 10  && nots.getValeur() < 12}">
 															        		
 															        		
-															        					<a href="javascript:void(0)" class="label label-info">${nots.getValeur()}</a>
+															        					<a href="#modal-small" id="noteed" class="label label-info" data-toggle="modal" onclick="return crunchifyAjax(${nots.getValeur()},${studs.get(i).getUser_id()},${tnotes.getTypeID()})">${nots.getValeur()}</a>
 															        			</c:when>
 															        			
 															        			<c:when test="${nots.getValeur() >= 12  && nots.getValeur() < 21}">
 															        		
 															        		
-															        					<a href="javascript:void(0)" class="label label-success">${nots.getValeur()}</a>
+															        					<a href="#modal-small" id="noteed" class="label label-success" data-toggle="modal"  onclick="return crunchifyAjax(${nots.getValeur()},${studs.get(i).getUser_id()},${tnotes.getTypeID()})">${nots.getValeur()}</a>
 															        			</c:when>
 															        			
 															        			<c:otherwise>
-																			        <a href="javascript:void(0)" class="label label-success">error</a>
+															        				<div class="input_fields_wrap">
+																			        <a href="#modal-small" id="noteed" class="btn btn-xs btn-danger" data-toggle="modal" onclick="return crunchifyAjax(${nots.getValeur()},${studs.get(i).getUser_id()},${tnotes.getTypeID()})"  >error</a>
+																			        </div>
 																			    </c:otherwise>
 															        			</c:choose>
 															        	</td>
@@ -1100,7 +1132,7 @@
                                                         <li><a href="javascript:void(0)"><i class="fa fa-print pull-right"></i> Print</a></li>
                                                         <li class="dropdown-header"><i class="fa fa-share pull-right"></i> Export As</li>
                                                         <li>
-                                                            <a href="javascript:void(0)">.pdf</a>
+                                                            <a href="#" class="export-pdf" data-table="#sample-table-1">.pdf</a>
                                                             <a href="javascript:void(0)">.cvs</a>
                                                         </li>
                                                     </ul>
@@ -1111,6 +1143,9 @@
                                     </tr>
                                 </tfoot>
                             </table>
+                            
+                            
+                            
                         </div>
                         <!-- END Table Styles Content -->
                     </div>
@@ -1234,6 +1269,416 @@
                 </div>
             </div>
         </div>
+        
+        
+        <!-- Large Modal -->
+                                <div id="modal-large" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                    <form action="saveNote" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
+                                            
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                <h3 class="modal-title">Ajouter les notes</h3>
+                                            </div>
+                                            <div class="modal-body">
+                                                
+
+
+
+												
+														<div class="row">
+														                        <div class="col-md-6">
+														                            <!-- Basic Form Elements Block -->
+														                            <div class="block">
+														                            
+														                            
+														                            
+														                            
+														                            
+														                            <div class="block-title">
+														                               <div class="block-options pull-right">
+														                                        
+														                                    </div>
+														                                    <h2><strong>Liste des étudialnt</strong> à mettre niveau + filiére</h2>
+														                              </div>
+														                              
+														                              
+                                    
+                                    																		
+                                    																		
+                                    																<table id="general-table" class="table table-striped table-vcenter">
+                                    																
+                                    																
+                                    																	<thead>
+																		                                    <tr>
+																		                                       
+																		                                        <th style="width: 150px;" class="text-center"><i class="gi gi-user"></i></th>
+																		                                        <th>Etudiant</th>
+																		                                        <th>Note</th>
+																		                                         
+																		                                    </tr>
+																		                                </thead>
+																		                                
+																		                                <tbody>
+																		                                	<c:forEach items="${studs}" var="etudiant">
+																		                                	
+																		                                	
+																		                                	<tr>
+																		                                		<td class="text-center"><img width="40" height="40" src="photoStudent?userID=${etudiant.getUser_id()}" alt="avatar" class="img-circle"></td>
+																		                                		<td><a href="page_ready_user_profile.html">${etudiant.getNom()} ${etudiant.getPrenom()}</a></td>
+																		                                		<td>
+																		                                			
+																		                                				<input type="text" id="${etudiant.getUser_id()}" name="listNotes" class="form-control" placeholder="note" >
+																		                                			
+																		                                				<input id="secretValue" name="idStudent" type="hidden" value="${etudiant.getUser_id()}"/>
+																		                                		
+																		                                		</td>
+																		                                	</tr>
+																		                                	
+																		                                	</c:forEach>
+																		                                
+																		                                		
+																		                                </tbody>
+                                    																
+                                    																</table>	
+                                    																		
+                                    																		
+                                    													
+														                            
+														                            
+														                            
+														                            
+														                            </div>
+														                         </div>
+														                         
+														                         
+														                         
+														                         
+														                         <div class="col-md-6">
+																                            <!-- Horizontal Form Block -->
+																                            <div class="block">
+																                            
+																                            <div class="block-title">
+															                                    <div class="block-options pull-right">
+															                                        
+															                                    </div>
+															                                    <h2><strong>Informations sur le Type Note</strong></h2>
+															                                </div>
+																                            
+																                            <div class="form-group">
+																	                                        <label class="col-md-3 control-label" for="example-text-input">Non du type de la note</label>
+																	                                        <div class="col-md-9">
+																	                                        	
+																	                                            <input type="text" id="nomtype" name="nomtype" class="form-control" placeholder="nom type note">
+																	                                            
+																	                                            <span class="help-block">exemple: TP1,TD.. etc </span>
+																	                                        </div>
+																	                                </div>		
+																	                                
+																	                                
+																	                                <div class="form-group">
+																	                                        <label class="col-md-3 control-label" for="example-text-input">Text Input</label>
+																	                                        <div class="col-md-9">
+																	                                             <input type="text" id="pourcentage" name="pourcentage" class="form-control input-slider" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="20" data-slider-orientation="horizontal" data-slider-selection="before" data-slider-tooltip="show">
+																	                                            <span class="help-block">pourcentage 0 % à 100 %</span><br/>
+																	                                        </div>
+																	                                </div>
+																                            
+																                            
+																                            </div>
+																                             
+																                            
+																                 </div>
+														                         
+														                        
+														                         
+														                         
+														                         
+														                         
+														</div>
+														
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-sm btn-primary">Ajouté</button>
+                                            </div>
+                                        </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- END Large Modal -->
+                                
+                                
+                                
+                                 <form action="updateNote" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
+                                
+                                
+                                                             <!-- Small Modal -->
+                                <div id="modal-small" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog modal-sm">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                <h3 class="modal-title"> Changer Note</h3>
+                                            </div>
+                                            <div class="modal-body">
+                                            
+                                            
+                                            
+                                            <label class="col-md-3 control-label" for="example-text-input">Note</label>
+											<div class="col-md-9">
+											  <input type="text" id="noteedit" name="noteedit" class="form-control" placeholder="Note">
+											  <input id="idstudent" name="idstudent" type="hidden" />
+											  <input id="idtype" name="idtype" type="hidden" />					                                		
+											</div>
+											<br/><br/>
+                                              
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-sm btn-primary" >Save changes</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- END Small Modal -->
+                                </form>
+                     
+                     
+                     
+                     
+                      <form action="updateTN" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
+                                
+                     <div id="modal-regular2" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                <h3 class="modal-title">Modifier type note</h3>
+                                            </div>
+                                            <div class="modal-body">
+                                                
+
+
+												      <!-- Horizontal Form Block -->
+																                           
+																                            
+																                            
+																                            
+																                            <div class="form-group">
+																	                                        <label class="col-md-3 control-label" for="example-text-input">Non du type de la note</label>
+																	                                        <div class="col-md-9">
+																	                                        	
+																	                                            <input type="text" id="nomtypedit" name="nomtype" class="form-control" placeholder="nom type note" value="">
+																	                                            <input id="idtypeedit" name="idtypeedit" type="hidden" />
+																	                                            <span class="help-block">exemple: TP1,TD.. etc </span>
+																	                                        </div>
+																	                                </div>		
+																	                                
+																	                                
+																	                                <div class="form-group">
+																	                                        <label class="col-md-3 control-label" for="example-text-input">Text Input</label>
+																	                                        <div class="col-md-9">
+																	                                             <input type="text" id="pourcentageedit" name="pourcentageedit" class="form-control input-slider" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="20" data-slider-orientation="horizontal" data-slider-selection="before" data-slider-tooltip="show">
+																	                                            <span class="help-block">pourcentage 0 % à 100 %</span><br/>
+																	                                        </div>
+																	                                </div>
+																                            
+																                            
+																                            
+																                             
+																                            
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-sm btn-primary">Save changes</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                     
+                     </form>
+                     <script type="text/javascript">
+                     
+                     
+                     
+                     function tnedit(pr,nom,id) {
+                  		
+                    	 alert("Wooork");
+                    	 
+                    	 document.getElementById('nomtypedit').value = nom;
+                    	 
+                    	 document.getElementById('pourcentageedit').data_slider_value = pr;
+                    	
+                    	 document.getElementById('idtypeedit').value = id;
+                    	    
+                    	}
+                     </script>
+                     <script type="text/javascript">
+
+                   
+                     function crunchifyAjax(note,idstud,idtype) {
+                    		
+                    	 //alert("Wooork");
+                    	 document.getElementById('noteedit').value = note;
+                    	 document.getElementById('idstudent').value = idstud;
+                    	 document.getElementById('idtype').value = idtype;
+                    	    
+                    	}
+                     
+                    
+                     
+                     
+                     </script>
+                     
+                      <script type="text/javascript">
+                      
+                      var TableExport = function() {
+                    		"use strict";
+                    		//function to initiate HTML Table Export
+                    		var runTableExportTools = function() {
+                    			$(".export-pdf").on("click", function(e) {
+                    						e.preventDefault();
+                    						var exportTable = $(this).data("table");
+                    						var ignoreColumn = $(this).data("ignorecolumn");
+                    						$(exportTable).tableExport({
+                    							type: 'pdf',
+                    							escape: 'false',
+                    							ignoreColumn: '['+ignoreColumn+']'
+                    						});
+                    					});
+                    					$(".export-png").on("click", function(e) {
+                    						e.preventDefault();
+                    						e.preventDefault();
+                    						var exportTable = $(this).data("table");
+                    						var ignoreColumn = $(this).data("ignorecolumn");
+                    						$(exportTable).tableExport({
+                    							type: 'png',
+                    							escape: 'false',
+                    							ignoreColumn: '['+ignoreColumn+']'
+                    						});
+                    					});
+                    					$(".export-excel").on("click", function(e) {
+                    						e.preventDefault();
+                    						var exportTable = $(this).data("table");
+                    						var ignoreColumn = $(this).data("ignorecolumn");
+                    						$(exportTable).tableExport({
+                    							type: 'excel',
+                    							escape: 'false',
+                    							ignoreColumn: '['+ignoreColumn+']'
+                    						});
+                    					});
+                    					$(".export-doc").on("click", function(e) {
+                    						e.preventDefault();
+                    						var exportTable = $(this).data("table");
+                    						var ignoreColumn = $(this).data("ignorecolumn");
+                    						$(exportTable).tableExport({
+                    							type: 'doc',
+                    							escape: 'false',
+                    							ignoreColumn: '['+ignoreColumn+']'
+                    						});
+                    					});
+                    					$(".export-powerpoint").on("click", function(e) {
+                    						e.preventDefault();
+                    						var exportTable = $(this).data("table");
+                    						var ignoreColumn = $(this).data("ignorecolumn");
+                    						$(exportTable).tableExport({
+                    							type: 'powerpoint',
+                    							escape: 'false',
+                    							ignoreColumn: '['+ignoreColumn+']'
+                    						});
+                    					});
+                    					$(".export-csv").on("click", function(e) {
+                    						e.preventDefault();
+                    						var exportTable = $(this).data("table");
+                    						var ignoreColumn = $(this).data("ignorecolumn");
+                    						$(exportTable).tableExport({
+                    							type: 'csv',
+                    							escape: 'false',
+                    							ignoreColumn: '['+ignoreColumn+']'
+                    						});
+                    					});
+                    					$(".export-txt").on("click", function(e) {
+                    						e.preventDefault();
+                    						var exportTable = $(this).data("table");
+                    						var ignoreColumn = $(this).data("ignorecolumn");
+                    						$(exportTable).tableExport({
+                    							type: 'txt',
+                    							escape: 'false',
+                    							ignoreColumn: '['+ignoreColumn+']'
+                    						});
+                    					});
+                    					$(".export-xml").on("click", function(e) {
+                    						e.preventDefault();
+                    						var exportTable = $(this).data("table");
+                    						var ignoreColumn = $(this).data("ignorecolumn");
+                    						$(exportTable).tableExport({
+                    							type: 'xml',
+                    							escape: 'false',
+                    							ignoreColumn: '['+ignoreColumn+']'
+                    						});
+                    					});
+                    					$(".export-sql").on("click", function(e) {
+                    						e.preventDefault();
+                    						var exportTable = $(this).data("table");
+                    						var ignoreColumn = $(this).data("ignorecolumn");
+                    						$(exportTable).tableExport({
+                    							type: 'sql',
+                    							escape: 'false',
+                    							ignoreColumn: '['+ignoreColumn+']'
+                    						});
+                    					});
+                    					$(".export-json").on("click", function(e) {
+                    						e.preventDefault();
+                    						var exportTable = $(this).data("table");
+                    						var ignoreColumn = $(this).data("ignorecolumn");
+                    						$(exportTable).tableExport({
+                    							type: 'json',
+                    							escape: 'false',
+                    							ignoreColumn: '['+ignoreColumn+']'
+                    						});
+                    					});
+                    		};
+                    		
+                    		//function to initiate DataTable
+                    		//DataTable is a highly flexible tool, based upon the foundations of progressive enhancement,
+                    		//which will add advanced interaction controls to any HTML table
+                    		//For more information, please visit https://datatables.net/
+                    		
+                    		return {
+                    			//main function to initiate template pages
+                    			init : function() {
+                    				runTableExportTools();
+                    				
+                    			}
+                    		};
+                    	}();
+
+                      
+                      </script>
+                         <script  src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>       
         <!-- END User Settings -->
 
         <!-- Include Jquery library from Google's CDN but if something goes wrong get Jquery from local file (Remove 'http:' if you have SSL) -->
@@ -1244,5 +1689,39 @@
         <script src="<%=request.getContextPath()%>/resources/js/vendor/bootstrap.min.js"></script>
         <script src="<%=request.getContextPath()%>/resources/js/plugins.js"></script>
         <script src="<%=request.getContextPath()%>/resources/js/app.js"></script>
+        
+        <script src="<%=request.getContextPath()%>/resources/js/pages/tablesGeneral.js"></script>
+        <script>$(function(){ TablesGeneral.init(); });</script>
+        
+        <script src="<%=request.getContextPath()%>/resources/js/pages/uiProgress.js"></script>
+        <script>$(function(){ UiProgress.init(); });</script>
+        
+        
+        
+        <!-- start: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
+
+		<script type="text/javascript" src="<%=request.getContextPath()%>/assets/plugins/select2/select2.min.js"></script>
+		
+		<script src="<%=request.getContextPath()%>/resources/assets/plugins/bootbox/bootbox.min.js"></script>
+		<script type="text/javascript" src="<%=request.getContextPath()%>/resources/assets/plugins/jquery-mockjax/jquery.mockjax.js"></script>
+		<script type="text/javascript" src="<%=request.getContextPath()%>/resources/assets/plugins/DataTables/media/js/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="<%=request.getContextPath()%>/resources/assets/plugins/DataTables/media/js/DT_bootstrap.js"></script>
+
+		<script src="<%=request.getContextPath()%>/resources/assets/plugins/tableExport/tableExport.js"></script>
+		<script src="<%=request.getContextPath()%>/resources/assets/plugins/tableExport/jquery.base64.js"></script>
+		<script src="<%=request.getContextPath()%>/resources/assets/plugins/tableExport/html2canvas.js"></script>
+		<script src="<%=request.getContextPath()%>/resources/assets/plugins/tableExport/jquery.base64.js"></script>
+		<script src="<%=request.getContextPath()%>/resources/assets/plugins/tableExport/jspdf/libs/sprintf.js"></script>
+		<script src="<%=request.getContextPath()%>/resources/assets/plugins/tableExport/jspdf/jspdf.js"></script>
+		<script src="<%=request.getContextPath()%>/resources/assets/plugins/tableExport/jspdf/libs/base64.js"></script>
+		<script src="<%=request.getContextPath()%>/resources/assets/js/table-export.js"></script>
+		<script src="<%=request.getContextPath()%>/resources/assets/plugins/jQuery-lib/2.0.3/jquery.min.js"></script>
+		<!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
+		<script>
+			jQuery(document).ready(function() {
+				Main.init();
+				TableExport.init();
+			});
+		</script>
     </body>
 </html>
